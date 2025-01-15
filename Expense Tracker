@@ -1,0 +1,101 @@
+#include <iostream>
+using namespace std;
+
+class Expense {
+private:
+    string date;
+    string category;
+    double amount;
+
+public:
+    Expense(string d, string c, double a) : date(d), category(c), amount(a) {}
+
+    void display() const {
+        cout << "Date: " << date << ", Category: " << category << ", Amount: " << amount << endl;
+    }
+
+    double getAmount() const { return amount; }
+
+    void setDate(string d) { date = d; }
+    void setCategory(string c) { category = c; }
+    void setAmount(double a) { amount = a; }
+
+    string getDate() const { return date; }
+    string getCategory() const { return category; }
+};
+
+class ExpenseTracker {
+private:
+    Expense* expenses[100];
+    int count;
+
+public:
+    ExpenseTracker() : count(0) {}
+
+    void addExpense() {
+        string date, category;
+        double amount;
+        cout << "Enter date (DD/MM/YYYY): ";
+        cin >> date;
+        cout << "Enter category (e.g., Food, Transport): ";
+        cin >> category;
+        cout << "Enter amount: ";
+        cin >> amount;
+        expenses[count] = new Expense(date, category, amount);
+        count++;
+        cout << "Expense added successfully!\n";
+    }
+
+    void viewExpenses() {
+        if (count == 0) {
+            cout << "No expenses recorded yet.\n";
+            return;
+        }
+        cout << "Expenses:\n";
+        for (int i = 0; i < count; i++) {
+            expenses[i]->display();
+        }
+    }
+
+    void calculateTotal() {
+        double total = 0;
+        for (int i = 0; i < count; i++) {
+            total += expenses[i]->getAmount();
+        }
+        cout << "Total Expenses: " << total << endl;
+    }
+};
+
+int main() {
+    ExpenseTracker tracker;
+    int choice;
+
+    do {
+        cout << "\nExpense Tracker Menu:\n";
+        cout << "1. Add Expense\n";
+        cout << "2. View Expenses\n";
+        cout << "3. Calculate Total Expenses\n";
+        cout << "4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                tracker.addExpense();
+                break;
+            case 2:
+                tracker.viewExpenses();
+                break;
+            case 3:
+                tracker.calculateTotal();
+                break;
+            case 4:
+                cout << "Exiting...\n";
+                break;
+            default:
+                cout << "Invalid choice, please try again.\n";
+        }
+    } while (choice != 4);
+
+    return 0;
+}
