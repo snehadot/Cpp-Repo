@@ -1,0 +1,51 @@
+#include <iostream>
+using namespace std;
+
+char calculateGrade(float percentage) {
+    if (percentage >= 90) return 'A';
+    else if (percentage >= 80) return 'B';
+    else if (percentage >= 70) return 'C';
+    else if (percentage >= 60) return 'D';
+    else return 'F';
+}
+
+int main() {
+    int numSubjects, marks[100], totalMarks = 0, maxMarks;
+    cout << "Enter the number of subjects: ";
+    cin >> numSubjects;
+    cout << "Enter the maximum marks per subject: ";
+    cin >> maxMarks;
+
+    for (int i = 0; i < numSubjects; ++i) {
+        cout << "Enter marks for subject " << (i + 1) << ": ";
+        cin >> marks[i];
+        totalMarks += marks[i];
+    }
+
+    int maxPossibleMarks = maxMarks * numSubjects;
+    float percentage = (static_cast<float>(totalMarks) / maxPossibleMarks) * 100;
+    char grade = calculateGrade(percentage);
+
+    cout << "\n--- Report Card ---\n";
+    for (int i = 0; i < numSubjects; ++i) {
+        cout << "Subject " << (i + 1) << ": " << marks[i] << "/" << maxMarks << "\n";
+    }
+    cout << "Total Marks: " << totalMarks << "/" << maxPossibleMarks << "\n";
+    cout << "Percentage: " << percentage << "%\n";
+    cout << "Grade: " << grade << "\n";
+
+    return 0;
+}
+/* Enter the number of subjects: 3
+Enter the maximum marks per subject: 75
+Enter marks for subject 1: 69
+Enter marks for subject 2: 55
+Enter marks for subject 3: 70
+
+--- Report Card ---
+Subject 1: 69/75
+Subject 2: 55/75
+Subject 3: 70/75
+Total Marks: 194/225
+Percentage: 86.2222%
+Grade: B*/
