@@ -1,0 +1,69 @@
+#include <iostream>
+using namespace std;
+
+class GradeCalculator {
+private:
+    int numSubjects;
+    int marks[100];
+    int maxMarks;
+    int totalMarks;
+
+public:
+    void inputDetails() {
+        totalMarks = 0;
+        cout << "Enter the number of subjects: ";
+        cin >> numSubjects;
+        cout << "Enter the maximum marks per subject: ";
+        cin >> maxMarks;
+
+        for (int i = 0; i < numSubjects; ++i) {
+            cout << "Enter marks for subject " << (i + 1) << ": ";
+            cin >> marks[i];
+            totalMarks += marks[i];
+        }
+    }
+
+    float calculatePercentage() {
+        return (static_cast<float>(totalMarks) / (maxMarks * numSubjects)) * 100;
+    }
+
+    char calculateGrade(float percentage) {
+        if (percentage >= 90) return 'A';
+        else if (percentage >= 80) return 'B';
+        else if (percentage >= 70) return 'C';
+        else if (percentage >= 60) return 'D';
+        else return 'F';
+    }
+
+    void displayReport() {
+        float percentage = calculatePercentage();
+        char grade = calculateGrade(percentage);
+
+        cout << "\n--- Report Card ---\n";
+        for (int i = 0; i < numSubjects; ++i) {
+            cout << "Subject " << (i + 1) << ": " << marks[i] << "/" << maxMarks << "\n";
+        }
+        cout << "Total Marks: " << totalMarks << "/" << (maxMarks * numSubjects) << "\n";
+        cout << "Percentage: " << percentage << "%\n";
+        cout << "Grade: " << grade << "\n";
+    }
+};
+
+int main() {
+    GradeCalculator gc;
+    gc.inputDetails();
+    gc.displayReport();
+    return 0;
+}
+/* output :
+Enter the number of subjects: 2
+Enter the maximum marks per subject: 100
+Enter marks for subject 1: 89
+Enter marks for subject 2: 74
+
+--- Report Card ---
+Subject 1: 89/100
+Subject 2: 74/100
+Total Marks: 163/200
+Percentage: 81.5%
+Grade: B */
