@@ -1,0 +1,95 @@
+#include <iostream>
+using namespace std;
+
+class BankAccount {
+private:
+    int accountNumber;
+    char accountHolderName[50];
+    float balance;
+
+public:
+    BankAccount(int accNo, const char* name, float initialBalance) {
+        accountNumber = accNo;
+        int i = 0;
+        while (name[i] != '\0' && i < 49) {
+            accountHolderName[i] = name[i];
+            i++;
+        }
+        accountHolderName[i] = '\0';
+        balance = initialBalance;
+    }
+
+    void deposit(float amount) {
+        if (amount > 0) {
+            balance += amount;
+            cout << "Deposit successful! New balance: " << balance << endl;
+        } else {
+            cout << "Invalid deposit amount!" << endl;
+        }
+    }
+
+    void withdraw(float amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            cout << "Withdrawal successful! New balance: " << balance << endl;
+        } else {
+            cout << "Insufficient funds or invalid amount!" << endl;
+        }
+    }
+
+    void displayBalance() const {
+        cout << "Account Number: " << accountNumber << endl;
+        cout << "Account Holder: " << accountHolderName << endl;
+        cout << "Current Balance: " << balance << endl;
+    }
+};
+
+int main() {
+    int accNo;
+    char name[50];
+    float initialBalance;
+
+    cout << "Enter account number: ";
+    cin >> accNo;
+    cin.ignore();
+    cout << "Enter account holder name: ";
+    cin.getline(name, 50);
+    cout << "Enter initial balance: ";
+    cin >> initialBalance;
+
+    BankAccount account(accNo, name, initialBalance);
+
+    int choice;
+    do {
+        cout << "\n1. Deposit\n2. Withdraw\n3. Display Balance\n4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: {
+                float amount;
+                cout << "Enter amount to deposit: ";
+                cin >> amount;
+                account.deposit(amount);
+                break;
+            }
+            case 2: {
+                float amount;
+                cout << "Enter amount to withdraw: ";
+                cin >> amount;
+                account.withdraw(amount);
+                break;
+            }
+            case 3:
+                account.displayBalance();
+                break;
+            case 4:
+                cout << "Exiting the system. Thank you!" << endl;
+                break;
+            default:
+                cout << "Invalid choice. Try again!" << endl;
+        }
+    } while (choice != 4);
+
+    return 0;
+}
