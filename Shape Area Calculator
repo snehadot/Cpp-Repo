@@ -4,7 +4,7 @@ using namespace std;
 // Base class: Shape
 class Shape {
 public:
-    virtual void calculateArea() = 0; // Pure virtual function
+    virtual void calculateArea() = 0;
 };
 
 // Derived class: Circle
@@ -16,7 +16,7 @@ public:
     Circle(float r) : radius(r) {}
 
     void calculateArea() override {
-        const float PI = 3.14159; // Use hardcoded value for PI
+        const float PI = 3.14159; 
         float area = PI * radius * radius;
         cout << "Area of Circle: " << area << endl;
     }
@@ -96,7 +96,7 @@ int main() {
 
     return 0;
 }
-/*  
+/*  output:
 --- Shape Area Calculator ---
 1. Circle
 2. Rectangle
