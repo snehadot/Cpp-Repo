@@ -1,0 +1,128 @@
+#include <iostream>
+using namespace std;
+
+// Base class: Shape
+class Shape {
+public:
+    virtual void calculateArea() = 0; // Pure virtual function
+};
+
+// Derived class: Circle
+class Circle : public Shape {
+private:
+    float radius;
+
+public:
+    Circle(float r) : radius(r) {}
+
+    void calculateArea() override {
+        const float PI = 3.14159; // Use hardcoded value for PI
+        float area = PI * radius * radius;
+        cout << "Area of Circle: " << area << endl;
+    }
+};
+
+// Derived class: Rectangle
+class Rectangle : public Shape {
+private:
+    float length, width;
+
+public:
+    Rectangle(float l, float w) : length(l), width(w) {}
+
+    void calculateArea() override {
+        float area = length * width;
+        cout << "Area of Rectangle: " << area << endl;
+    }
+};
+
+// Derived class: Triangle
+class Triangle : public Shape {
+private:
+    float base, height;
+
+public:
+    Triangle(float b, float h) : base(b), height(h) {}
+
+    void calculateArea() override {
+        float area = 0.5 * base * height;
+        cout << "Area of Triangle: " << area << endl;
+    }
+};
+
+int main() {
+    int choice;
+    do {
+        cout << "\n--- Shape Area Calculator ---\n";
+        cout << "1. Circle\n";
+        cout << "2. Rectangle\n";
+        cout << "3. Triangle\n";
+        cout << "4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: {
+                float radius;
+                cout << "Enter radius of the circle: ";
+                cin >> radius;
+                Circle circle(radius);
+                circle.calculateArea();
+                break;
+            }
+            case 2: {
+                float length, width;
+                cout << "Enter length and width of the rectangle: ";
+                cin >> length >> width;
+                Rectangle rectangle(length, width);
+                rectangle.calculateArea();
+                break;
+            }
+            case 3: {
+                float base, height;
+                cout << "Enter base and height of the triangle: ";
+                cin >> base >> height;
+                Triangle triangle(base, height);
+                triangle.calculateArea();
+                break;
+            }
+            case 4:
+                cout << "Exiting the program. Goodbye!\n";
+                break;
+            default:
+                cout << "Invalid choice! Please try again.\n";
+        }
+    } while (choice != 4);
+
+    return 0;
+}
+/*  
+--- Shape Area Calculator ---
+1. Circle
+2. Rectangle
+3. Triangle
+4. Exit
+Enter your choice: 2
+Enter length and width of the rectangle: 7
+6
+Area of Rectangle: 42
+
+--- Shape Area Calculator ---
+1. Circle
+2. Rectangle
+3. Triangle
+4. Exit
+Enter your choice: 1
+Enter radius of the circle: 25
+Area of Circle: 1963.49
+
+--- Shape Area Calculator ---
+1. Circle
+2. Rectangle
+3. Triangle
+4. Exit
+Enter your choice: 4
+Exiting the program. Goodbye!
+
+
+=== Code Execution Successful ===  */
