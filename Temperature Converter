@@ -1,0 +1,80 @@
+#include <iostream>
+using namespace std;
+
+void displayMenu();
+double celsiusToFahrenheit(double celsius);
+double fahrenheitToCelsius(double fahrenheit);
+double celsiusToKelvin(double celsius);
+double kelvinToCelsius(double kelvin);
+
+int main() {
+    int choice;
+    double inputTemp, convertedTemp;
+
+    do {
+        displayMenu();
+        cout << "Enter your choice (1-5): ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter temperature in Celsius: ";
+                cin >> inputTemp;
+                convertedTemp = celsiusToFahrenheit(inputTemp);
+                cout << inputTemp << " °C = " << convertedTemp << " °F\n";
+                break;
+            case 2:
+                cout << "Enter temperature in Fahrenheit: ";
+                cin >> inputTemp;
+                convertedTemp = fahrenheitToCelsius(inputTemp);
+                cout << inputTemp << " °F = " << convertedTemp << " °C\n";
+                break;
+            case 3:
+                cout << "Enter temperature in Celsius: ";
+                cin >> inputTemp;
+                convertedTemp = celsiusToKelvin(inputTemp);
+                cout << inputTemp << " °C = " << convertedTemp << " K\n";
+                break;
+            case 4:
+                cout << "Enter temperature in Kelvin: ";
+                cin >> inputTemp;
+                convertedTemp = kelvinToCelsius(inputTemp);
+                cout << inputTemp << " K = " << convertedTemp << " °C\n";
+                break;
+            case 5:
+                cout << "Exiting program. Thank you!\n";
+                break;
+            default:
+                cout << "Invalid choice. Please try again.\n";
+        }
+
+        cout << endl;
+    } while (choice != 5);
+
+    return 0;
+}
+
+void displayMenu() {
+    cout << "Temperature Converter Menu:\n";
+    cout << "1. Celsius to Fahrenheit\n";
+    cout << "2. Fahrenheit to Celsius\n";
+    cout << "3. Celsius to Kelvin\n";
+    cout << "4. Kelvin to Celsius\n";
+    cout << "5. Exit\n";
+}
+
+double celsiusToFahrenheit(double celsius) {
+    return (celsius * 9 / 5) + 32;
+}
+
+double fahrenheitToCelsius(double fahrenheit) {
+    return (fahrenheit - 32) * 5 / 9;
+}
+
+double celsiusToKelvin(double celsius) {
+    return celsius + 273.15;
+}
+
+double kelvinToCelsius(double kelvin) {
+    return kelvin - 273.15;
+}
