@@ -1,0 +1,49 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    // Define quiz questions and answers
+    string questions[] = {
+        "What is the capital of France?\n1. London\n2. Paris\n3. Berlin\n4. Rome",
+        "Which planet is known as the Red Planet?\n1. Venus\n2. Mars\n3. Jupiter\n4. Saturn",
+        "Who invented the telephone?\n1. Albert Einstein\n2. Nikola Tesla\n3. Alexander Graham Bell\n4. Thomas Edison",
+        "What is the square root of 64?\n1. 6\n2. 7\n3. 8\n4. 9"
+    };
+
+    int correctAnswers[] = {2, 2, 3, 3};  // Correct options for each question
+    int userAnswer, score = 0;
+    int totalQuestions = sizeof(questions) / sizeof(questions[0]);
+
+    cout << "Welcome to the Quiz!\n";
+    cout << "Answer the following questions by entering the correct option number.\n\n";
+
+    // Loop through the questions
+    for (int i = 0; i < totalQuestions; i++) {
+        cout << "Q" << (i + 1) << ": " << questions[i] << "\nYour answer: ";
+        cin >> userAnswer;
+
+        if (userAnswer == correctAnswers[i]) {
+            cout << "Correct!\n\n";
+            score++;
+        } else {
+            cout << "Wrong! The correct answer was option " << correctAnswers[i] << ".\n\n";
+        }
+    }
+
+    // Display final score
+    cout << "Quiz completed!\n";
+    cout << "You scored " << score << " out of " << totalQuestions << ".\n";
+
+    // Provide feedback based on the score
+    if (score == totalQuestions) {
+        cout << "Excellent work!\n";
+    } else if (score >= totalQuestions / 2) {
+        cout << "Good job, but you can do better.\n";
+    } else {
+        cout << "Keep practicing!\n";
+    }
+
+    return 0;
+}
