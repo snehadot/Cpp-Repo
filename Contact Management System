@@ -1,0 +1,70 @@
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+class Contact {
+private:
+    char name[50];
+    char phone[15];
+
+public:
+    void setContact() {
+        cout << "Enter Name: ";
+        cin >> name;
+        cout << "Enter Phone: ";
+        cin >> phone;
+    }
+
+    void displayContact() {
+        cout << "Name: " << name << ", Phone: " << phone << endl;
+    }
+
+    bool searchContact(const char* searchName) {
+        return strcmp(name, searchName) == 0;
+    }
+};
+
+int main() {
+    Contact contacts[100];
+    int count = 0;
+    int choice;
+    char searchName[50];
+
+    do {
+        cout << "\n1. Add Contact\n2. View Contacts\n3. Search Contact\n4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                contacts[count].setContact();
+                count++;
+                break;
+            case 2:
+                for (int i = 0; i < count; i++) {
+                    contacts[i].displayContact();
+                }
+                break;
+            case 3:
+                cout << "Enter name to search: ";
+                cin >> searchName;
+                for (int i = 0; i < count; i++) {
+                    if (contacts[i].searchContact(searchName)) {
+                        cout << "Contact found: ";
+                        contacts[i].displayContact();
+                        break;
+                    }
+                }
+                cout << "Contact not found.\n";
+                break;
+            case 4:
+                cout << "Exiting program.\n";
+                break;
+            default:
+                cout << "Invalid choice! Try again.\n";
+        }
+    } while (choice != 4);
+
+    return 0;
+}
