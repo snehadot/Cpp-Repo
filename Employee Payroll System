@@ -1,0 +1,64 @@
+#include <iostream>
+using namespace std;
+
+class Employee {
+private:
+    string name;
+    int employeeID;
+    float basicSalary;
+    float allowances;
+    float deductions;
+
+public:
+    // Function to input employee details
+    void inputDetails() {
+        cout << "Enter Employee ID: ";
+        cin >> employeeID;
+        cout << "Enter Name: ";
+        cin.ignore();
+        getline(cin, name);
+        cout << "Enter Basic Salary: ";
+        cin >> basicSalary;
+        cout << "Enter Allowances: ";
+        cin >> allowances;
+        cout << "Enter Deductions: ";
+        cin >> deductions;
+    }
+
+    // Function to calculate net salary
+    float calculateNetSalary() {
+        return basicSalary + allowances - deductions;
+    }
+
+    // Function to display employee details
+    void displayDetails() {
+        cout << "\nEmployee ID: " << employeeID;
+        cout << "\nName: " << name;
+        cout << "\nBasic Salary: " << basicSalary;
+        cout << "\nAllowances: " << allowances;
+        cout << "\nDeductions: " << deductions;
+        cout << "\nNet Salary: " << calculateNetSalary() << endl;
+    }
+};
+
+int main() {
+    int n;
+    cout << "Enter number of employees: ";
+    cin >> n;
+
+    Employee employees[n];
+
+    // Input details for each employee
+    for (int i = 0; i < n; i++) {
+        cout << "\nEnter details for Employee " << i + 1 << ":\n";
+        employees[i].inputDetails();
+    }
+
+    // Display details of all employees
+    cout << "\n---- Employee Payroll Details ----\n";
+    for (int i = 0; i < n; i++) {
+        employees[i].displayDetails();
+    }
+
+    return 0;
+}
