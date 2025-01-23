@@ -1,0 +1,62 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class Book {
+private:
+    int bookID;
+    char title[50];
+    char author[50];
+    float price;
+    int stock;
+
+public:
+    // Constructor to initialize book details
+    Book(int id, const char* t, const char* a, float p, int s) {
+        bookID = id;
+        strcpy(title, t);
+        strcpy(author, a);
+        price = p;
+        stock = s;
+    }
+
+    // Function to display book details
+    void displayDetails() {
+        cout << "\nBook ID: " << bookID;
+        cout << "\nTitle: " << title;
+        cout << "\nAuthor: " << author;
+        cout << "\nPrice: $" << price;
+        cout << "\nStock Available: " << stock << "\n";
+    }
+
+    // Function to sell a book
+    void sellBook(int quantity) {
+        if (quantity <= stock) {
+            stock -= quantity;
+            cout << "\n" << quantity << " book(s) sold successfully!";
+        } else {
+            cout << "\nInsufficient stock!";
+        }
+    }
+
+    // Function to restock books
+    void restock(int quantity) {
+        stock += quantity;
+        cout << "\n" << quantity << " book(s) added to stock.";
+    }
+};
+
+int main() {
+    // Creating a book object
+    Book b1(101, "C++ Programming", "Bjarne Stroustrup", 499.99, 10);
+
+    b1.displayDetails();  // Show initial book details
+
+    b1.sellBook(3);       // Sell 3 books
+    b1.displayDetails();  // Show updated book details
+
+    b1.restock(5);        // Add 5 more books to stock
+    b1.displayDetails();  // Show final book details
+
+    return 0;
+}
