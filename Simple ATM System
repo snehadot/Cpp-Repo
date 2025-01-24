@@ -1,0 +1,100 @@
+#include <iostream>
+using namespace std;
+
+class ATM {
+private:
+    int accountNumber;
+    int pin;
+    double balance;
+
+public:
+    // Constructor to initialize account details
+    ATM(int accNo, int p, double bal) {
+        accountNumber = accNo;
+        pin = p;
+        balance = bal;
+    }
+
+    // Function to authenticate user
+    bool authenticate(int enteredPin) {
+        return pin == enteredPin;
+    }
+
+    // Function to check balance
+    void checkBalance() {
+        cout << "Current Balance: $" << balance << endl;
+    }
+
+    // Function to deposit money
+    void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            cout << "Deposited: $" << amount << endl;
+        } else {
+            cout << "Invalid amount!" << endl;
+        }
+    }
+
+    // Function to withdraw money
+    void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            cout << "Withdrawn: $" << amount << endl;
+        } else {
+            cout << "Insufficient balance or invalid amount!" << endl;
+        }
+    }
+
+    // Function to display account details
+    void displayDetails() {
+        cout << "Account Number: " << accountNumber << endl;
+        cout << "Balance: $" << balance << endl;
+    }
+};
+
+int main() {
+    ATM myAccount(12345, 6789, 1000.0);
+    
+    int enteredPin;
+    cout << "Enter your PIN: ";
+    cin >> enteredPin;
+
+    if (myAccount.authenticate(enteredPin)) {
+        int choice;
+        do {
+            cout << "\n1. Check Balance\n2. Deposit\n3. Withdraw\n4. Account Details\n5. Exit\n";
+            cout << "Enter your choice: ";
+            cin >> choice;
+
+            switch (choice) {
+                case 1:
+                    myAccount.checkBalance();
+                    break;
+                case 2:
+                    double depositAmount;
+                    cout << "Enter amount to deposit: ";
+                    cin >> depositAmount;
+                    myAccount.deposit(depositAmount);
+                    break;
+                case 3:
+                    double withdrawAmount;
+                    cout << "Enter amount to withdraw: ";
+                    cin >> withdrawAmount;
+                    myAccount.withdraw(withdrawAmount);
+                    break;
+                case 4:
+                    myAccount.displayDetails();
+                    break;
+                case 5:
+                    cout << "Exiting...\n";
+                    break;
+                default:
+                    cout << "Invalid choice, try again!" << endl;
+            }
+        } while (choice != 5);
+    } else {
+        cout << "Invalid PIN. Access Denied!" << endl;
+    }
+
+    return 0;
+}
