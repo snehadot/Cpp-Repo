@@ -1,0 +1,113 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Hostel {
+private:
+    string studentName;
+    int roomNumber;
+    bool isAllocated;
+
+public:
+    // Constructor to initialize room
+    Hostel() {
+        studentName = "";
+        roomNumber = 0;
+        isAllocated = false;
+    }
+
+    // Function to allocate room
+    void allocateRoom(string name, int roomNum) {
+        if (!isAllocated) {
+            studentName = name;
+            roomNumber = roomNum;
+            isAllocated = true;
+            cout << "Room " << roomNumber << " allocated to " << studentName << " successfully!\n";
+        } else {
+            cout << "Room " << roomNumber << " is already occupied.\n";
+        }
+    }
+
+    // Function to deallocate room
+    void deallocateRoom() {
+        if (isAllocated) {
+            cout << "Room " << roomNumber << " vacated by " << studentName << " successfully!\n";
+            studentName = "";
+            roomNumber = 0;
+            isAllocated = false;
+        } else {
+            cout << "Room is already vacant.\n";
+        }
+    }
+
+    // Function to display room status
+    void displayStatus(int roomNum) {
+        if (isAllocated) {
+            cout << "Room " << roomNum << ": Occupied by " << studentName << endl;
+        } else {
+            cout << "Room " << roomNum << ": Available\n";
+        }
+    }
+
+    bool isRoomAllocated() {
+        return isAllocated;
+    }
+};
+
+int main() {
+    const int totalRooms = 5;
+    Hostel rooms[totalRooms];
+
+    int choice, roomNum;
+    string name;
+
+    do {
+        cout << "\nHostel Room Allocation System\n";
+        cout << "1. Allocate Room\n";
+        cout << "2. Deallocate Room\n";
+        cout << "3. Display Room Status\n";
+        cout << "4. Exit\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter student name: ";
+                cin >> name;
+                cout << "Enter room number (0-" << totalRooms - 1 << "): ";
+                cin >> roomNum;
+                if (roomNum >= 0 && roomNum < totalRooms) {
+                    rooms[roomNum].allocateRoom(name, roomNum);
+                } else {
+                    cout << "Invalid room number.\n";
+                }
+                break;
+            
+            case 2:
+                cout << "Enter room number to deallocate (0-" << totalRooms - 1 << "): ";
+                cin >> roomNum;
+                if (roomNum >= 0 && roomNum < totalRooms) {
+                    rooms[roomNum].deallocateRoom();
+                } else {
+                    cout << "Invalid room number.\n";
+                }
+                break;
+
+            case 3:
+                for (int i = 0; i < totalRooms; i++) {
+                    rooms[i].displayStatus(i);
+                }
+                break;
+
+            case 4:
+                cout << "Exiting...\n";
+                break;
+
+            default:
+                cout << "Invalid choice. Try again.\n";
+        }
+    } while (choice != 4);
+
+    return 0;
+}
