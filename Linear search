@@ -1,0 +1,62 @@
+//Display of students data by searching SGPA
+#include <iostream>
+using namespace std;
+
+class student {
+    int roll;
+    string name;
+    float sgpa;
+
+public:
+    void inputData() {
+        cout << "Enter roll: ";
+        cin >> roll;
+        cout << "Enter name: ";
+        cin >> name;
+        cout << "Enter SGPA: ";
+        cin >> sgpa;
+    }
+
+    void displayData() const {
+        cout << "Roll No: " << roll << endl;
+        cout << "Name: " << name << endl;
+        cout << "SGPA: " << sgpa << endl;
+    }
+
+    float key() const {         //geting sgpa
+        return sgpa;
+    }
+};
+
+int main() {
+    student s[10];
+    int n;
+    float searchSGPA;
+    bool found = false;
+
+    cout << "Enter the number of students: ";
+    cin >> n;
+
+    for (int i = 0; i < n; i++) {
+        s[i].inputData();
+    }
+
+    cout << "Enter SGPA to search: ";
+    cin >> searchSGPA;
+
+    cout << "Students with SGPA " << searchSGPA << ":" << endl;
+    for (int i = 0; i < n; i++) {
+        if (s[i].key() == searchSGPA) //checking for same sgpa
+        {  
+            s[i].displayData();
+            found = true;  // At least one match found
+        }
+    }
+
+    if (!found) //key is not equal to sgpa
+    {
+        cout << "No match  found" << endl;
+    }
+
+    return 0;
+}
