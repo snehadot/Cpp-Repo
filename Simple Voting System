@@ -1,0 +1,64 @@
+#include <iostream>
+using namespace std;
+
+class VotingSystem {
+private:
+    int votes[3];  // 3 candidates
+    string candidates[3] = {"Sneha", "Shiv", "Sanjay"};
+
+public:
+    VotingSystem() {
+        for (int i = 0; i < 3; i++) {
+            votes[i] = 0;
+        }
+    }
+
+    void vote(int candidateIndex) {
+        if (candidateIndex >= 0 && candidateIndex < 3) {
+            votes[candidateIndex]++;
+        } else {
+            cout << "Invalid candidate index!\n";
+        }
+    }
+
+    void displayResults() {
+        cout << "\nVoting Results:\n";
+        for (int i = 0; i < 3; i++) {
+            cout << candidates[i] << ": " << votes[i] << " votes\n";
+        }
+    }
+};
+
+int main() {
+    VotingSystem voting;
+    int choice;
+
+    do {
+        cout << "\nEnter your vote (0 - Alice, 1 - Bob, 2 - Charlie, 3 - Exit): ";
+        cin >> choice;
+
+        if (choice >= 0 && choice < 3) {
+            voting.vote(choice);
+        } else if (choice != 3) {
+            cout << "Invalid choice! Please try again.\n";
+        }
+
+    } while (choice != 3);
+
+    voting.displayResults();
+
+    return 0;
+}
+/*   Enter your vote (0 - Sneha, 1 - Shiv, 2 - Sanjay, 3 - Exit): 0
+
+Enter your vote (0 - Sneha, 1 - Shiv, 2 - Sanjay, 3 - Exit): 0
+
+Enter your vote (0 - Sneha, 1 - Shiv, 2 - Sanjay, 3 - Exit): 1
+
+Enter your vote (0 - Sneha, 1 - Shiv, 2 - Sanjay, 3 - Exit): 3
+
+Voting Results:
+Sneha: 2 votes
+Shiv: 1 votes
+Sanjay: 0 votes
+*/
