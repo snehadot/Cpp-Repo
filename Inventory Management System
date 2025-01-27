@@ -1,0 +1,61 @@
+#include <iostream>
+using namespace std;
+
+class Product {
+private:
+    int productID;
+    char name[50];
+    int quantity;
+    float price;
+
+public:
+    void addProduct() {
+        cout << "Enter Product ID: ";
+        cin >> productID;
+        cout << "Enter Product Name: ";
+        cin >> name;
+        cout << "Enter Quantity: ";
+        cin >> quantity;
+        cout << "Enter Price: ";
+        cin >> price;
+    }
+
+    void displayProduct() {
+        cout << "\nProduct ID: " << productID;
+        cout << "\nProduct Name: " << name;
+        cout << "\nQuantity: " << quantity;
+        cout << "\nPrice: " << price << endl;
+    }
+
+    int getProductID() {
+        return productID;
+    }
+
+    void updateQuantity(int q) {
+        quantity = q;
+    }
+};
+
+int main() {
+    Product p1, p2;
+    int newQty;
+
+    cout << "Add details for first product:\n";
+    p1.addProduct();
+    cout << "Add details for second product:\n";
+    p2.addProduct();
+
+    cout << "\nProduct Details:";
+    p1.displayProduct();
+    p2.displayProduct();
+
+    cout << "\nEnter new quantity for first product: ";
+    cin >> newQty;
+    p1.updateQuantity(newQty);
+
+    cout << "\nUpdated Product Details:";
+    p1.displayProduct();
+    p2.displayProduct();
+
+    return 0;
+}
