@@ -1,0 +1,77 @@
+#include <iostream>
+using namespace std;
+
+class Matrix {
+private:
+    int matrix[2][2];
+
+public:
+    void inputMatrix() {
+        cout << "Enter elements of the 2x2 matrix:\n";
+        for (int i = 0; i < 2; ++i) {
+            for (int j = 0; j < 2; ++j) {
+                cin >> matrix[i][j];
+            }
+        }
+    }
+
+    void displayMatrix() {
+        cout << "Matrix:\n";
+        for (int i = 0; i < 2; ++i) {
+            for (int j = 0; j < 2; ++j) {
+                cout << matrix[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+
+    Matrix add(Matrix m) {
+        Matrix result;
+        for (int i = 0; i < 2; ++i) {
+            for (int j = 0; j < 2; ++j) {
+                result.matrix[i][j] = matrix[i][j] + m.matrix[i][j];
+            }
+        }
+        return result;
+    }
+
+    Matrix multiply(Matrix m) {
+        Matrix result;
+        for (int i = 0; i < 2; ++i) {
+            for (int j = 0; j < 2; ++j) {
+                result.matrix[i][j] = 0;
+                for (int k = 0; k < 2; ++k) {
+                    result.matrix[i][j] += matrix[i][k] * m.matrix[k][j];
+                }
+            }
+        }
+        return result;
+    }
+};
+
+int main() {
+    Matrix m1, m2, result;
+    int choice;
+
+    cout << "Matrix 1:\n";
+    m1.inputMatrix();
+    cout << "Matrix 2:\n";
+    m2.inputMatrix();
+
+    cout << "Choose an operation:\n1. Addition\n2. Multiplication\n";
+    cin >> choice;
+
+    if (choice == 1) {
+        result = m1.add(m2);
+        cout << "Result of Addition:\n";
+    } else if (choice == 2) {
+        result = m1.multiply(m2);
+        cout << "Result of Multiplication:\n";
+    } else {
+        cout << "Invalid choice!";
+        return 0;
+    }
+
+    result.displayMatrix();
+    return 0;
+}
