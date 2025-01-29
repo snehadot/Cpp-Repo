@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+
+class ParkingLot {
+private:
+    int totalSpots;
+    int occupiedSpots;
+
+public:
+    // Constructor to initialize the parking lot
+    ParkingLot(int spots) {
+        totalSpots = spots;
+        occupiedSpots = 0;
+    }
+
+    // Function to park a vehicle
+    void parkVehicle() {
+        if (occupiedSpots < totalSpots) {
+            occupiedSpots++;
+            cout << "Vehicle parked. Available spots: " << totalSpots - occupiedSpots << endl;
+        } else {
+            cout << "Parking lot is full!" << endl;
+        }
+    }
+
+    // Function to remove a vehicle
+    void removeVehicle() {
+        if (occupiedSpots > 0) {
+            occupiedSpots--;
+            cout << "Vehicle removed. Available spots: " << totalSpots - occupiedSpots << endl;
+        } else {
+            cout << "No vehicles to remove!" << endl;
+        }
+    }
+
+    // Function to display parking lot status
+    void displayStatus() {
+        cout << "Total spots: " << totalSpots << ", Occupied spots: " << occupiedSpots 
+             << ", Available spots: " << totalSpots - occupiedSpots << endl;
+    }
+};
+
+int main() {
+    ParkingLot lot(10); // Initialize parking lot with 10 spots
+
+    lot.parkVehicle();
+    lot.parkVehicle();
+    lot.displayStatus();
+    
+    lot.removeVehicle();
+    lot.displayStatus();
+
+    return 0;
+}
