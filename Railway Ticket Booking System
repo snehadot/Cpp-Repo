@@ -1,0 +1,61 @@
+#include <iostream>
+using namespace std;
+
+class Ticket {
+private:
+    string name;
+    int age;
+    int trainNumber;
+    string seatType;
+
+public:
+    void bookTicket() {
+        cout << "Enter Name: ";
+        cin >> name;
+        cout << "Enter Age: ";
+        cin >> age;
+
+        if (age < 18) {
+            cout << "Booking failed! Passengers must be at least 18 years old.\n";
+            return;
+        }
+
+        cout << "Enter Train Number: ";
+        cin >> trainNumber;
+        cout << "Enter Seat Type (Sleeper/AC/General): ";
+        cin >> seatType;
+
+        cout << "Ticket booked successfully!\n";
+    }
+
+    void displayTicket() {
+        if (age < 18) return;  // Prevents showing failed bookings
+
+        cout << "\n------ Ticket Details ------\n";
+        cout << "Name: " << name << "\n";
+        cout << "Age: " << age << "\n";
+        cout << "Train Number: " << trainNumber << "\n";
+        cout << "Seat Type: " << seatType << "\n";
+        cout << "----------------------------\n";
+    }
+};
+
+int main() {
+    Ticket t1;
+    t1.bookTicket();
+    t1.displayTicket();
+
+    return 0;
+}
+/* Enter Name: sneha
+Enter Age: 19
+Enter Train Number: 4
+Enter Seat Type (Sleeper/AC/General): ac
+Ticket booked successfully!
+
+------ Ticket Details ------
+Name: sneha
+Age: 19
+Train Number: 4
+Seat Type: ac
+----------------------------  */
