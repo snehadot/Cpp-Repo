@@ -56,7 +56,7 @@ public:
 };
 
 int main() {
-    const int totalRooms = 5;
+     int totalRooms = 5;
     Hostel rooms[totalRooms];
 
     int choice, roomNum;
