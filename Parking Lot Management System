@@ -13,7 +13,7 @@ public:
         occupiedSpots = 0;
     }
 
-    // Function to park a vehicle
+    // to park a vehicle
     void parkVehicle() {
         if (occupiedSpots < totalSpots) {
             occupiedSpots++;
@@ -23,7 +23,7 @@ public:
         }
     }
 
-    // Function to remove a vehicle
+    // to remove a vehicle
     void removeVehicle() {
         if (occupiedSpots > 0) {
             occupiedSpots--;
