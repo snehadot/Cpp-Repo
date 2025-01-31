@@ -4,7 +4,7 @@ using namespace std;
 class VotingSystem {
 private:
     int votes[3];  // 3 candidates
-    string candidates[3] = {"Sneha", "Shiv", "Sanjay"};
+    string candidates[3] = {"sneha", "shiv", "sanjay"};
 
 public:
     VotingSystem() {
@@ -34,7 +34,7 @@ int main() {
     int choice;
 
     do {
-        cout << "\nEnter your vote (0 - Alice, 1 - Bob, 2 - Charlie, 3 - Exit): ";
+        cout << "\nEnter your vote (0 - Sneha, 1 - Shiv, 2 - Sanjay, 3 - Exit): ";
         cin >> choice;
 
         if (choice >= 0 && choice < 3) {
@@ -58,7 +58,7 @@ Enter your vote (0 - Sneha, 1 - Shiv, 2 - Sanjay, 3 - Exit): 1
 Enter your vote (0 - Sneha, 1 - Shiv, 2 - Sanjay, 3 - Exit): 3
 
 Voting Results:
-Sneha: 2 votes
-Shiv: 1 votes
-Sanjay: 0 votes
+sneha: 2 votes
+shiv: 1 votes
+sanjay: 0 votes
 */
