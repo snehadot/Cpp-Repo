@@ -1,0 +1,59 @@
+#include <iostream>
+using namespace std;
+
+class HotelBill {
+private:
+    int roomNumber;
+    string customerName;
+    int daysStayed;
+    float roomRate;
+
+public:
+    // Constructor to initialize values
+    HotelBill(int r, string name, int days, float rate) {
+        roomNumber = r;
+        customerName = name;
+        daysStayed = days;
+        roomRate = rate;
+    }
+
+    // Function to calculate total bill
+    float calculateBill() {
+        return daysStayed * roomRate;
+    }
+
+    // Function to display bill details
+    void displayBill() {
+        cout << "\n--- Hotel Bill ---\n";
+        cout << "Customer: " << customerName << endl;
+        cout << "Room Number: " << roomNumber << endl;
+        cout << "Days Stayed: " << daysStayed << endl;
+        cout << "Room Rate: Rs." << roomRate << " per day" << endl;
+        cout << "Total Bill: Rs." << calculateBill() << endl;
+    }
+};
+
+int main() {
+    int room, days;
+    string name;
+    float rate;
+
+    // Taking user input
+    cout << "Enter Room Number: ";
+    cin >> room;
+    cout << "Enter Customer Name: ";
+    cin.ignore();
+    getline(cin, name);
+    cout << "Enter Number of Days Stayed: ";
+    cin >> days;
+    cout << "Enter Room Rate per Day: ";
+    cin >> rate;
+
+    // Creating an object of HotelBill class
+    HotelBill customer(room, name, days, rate);
+
+    // Displaying the bill
+    customer.displayBill();
+
+    return 0;
+}
