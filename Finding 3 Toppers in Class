@@ -1,0 +1,62 @@
+#include <iostream>
+using namespace std;
+
+class Student {
+public:
+    int rollno;
+    char name[20];
+    float sgpa;
+
+    void inputdata() {
+        cout << "Enter Roll No : ";
+        cin >> rollno;
+        cout << "Enter the Name : ";
+        cin >> name;
+        cout << "Enter the SGPA : ";
+        cin >> sgpa;
+    }
+
+    void display() {
+        cout << rollno << "        " << name << "        " << sgpa << endl;
+    }
+};
+
+// Insertion Sort to sort students by SGPA in descending order
+void insertionSort(Student s[], int n) {
+    for (int i = 1; i < n; i++) {
+        Student key = s[i];  // The current student to be placed in the correct position
+        int j = i - 1;
+
+        // Move elements of s[0..i-1] that are less than key.sgpa to one position ahead
+        while (j >= 0 && s[j].sgpa < key.sgpa) {
+            s[j + 1] = s[j];
+            j = j - 1;
+        }
+        s[j + 1] = key;  // Place the current student in the correct position
+    }
+}
+
+int main() {
+    int n;
+    Student s[100];
+
+    cout << "Enter the Number of Students: ";
+    cin >> n;
+
+    for (int i = 0; i < n; i++) {
+        cout << "Enter the Details of Student No. " << i + 1 << endl;
+        s[i].inputdata();
+    }
+
+    // Sort students by SGPA in descending order
+    insertionSort(s, n);
+
+    cout << "\nTop 3 Toppers in the Class:" << endl;
+    cout << "Rollno      Name       SGPA" << endl;
+
+    for (int i = 0; i < 3 && i < n; i++) {
+        s[i].display();  // Display the top 3 students
+    }
+
+    return 0;
+}
