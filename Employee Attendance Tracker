@@ -1,0 +1,77 @@
+#include <iostream>
+using namespace std;
+
+class Employee {
+private:
+    string name;
+    int id;
+    int attendanceCount;
+
+public:
+    Employee(string empName, int empId) {
+        name = empName;
+        id = empId;
+        attendanceCount = 0;
+    }
+
+    void markAttendance() {
+        attendanceCount++;
+    }
+
+    void displayDetails() {
+        cout << name << " (ID: " << id << ") - Attendance: " << attendanceCount << endl;
+    }
+
+    int getId() {
+        return id;
+    }
+};
+
+int main() {
+    int n;
+    cout << "Enter number of employees: ";
+    cin >> n;
+
+    Employee* employees[n];
+
+    for (int i = 0; i < n; i++) {
+        string name;
+        int id;
+        cout << "\nEnter Employee " << i + 1 << " Name: ";
+        cin >> name;
+        cout << "Enter Employee " << i + 1 << " ID: ";
+        cin >> id;
+        employees[i] = new Employee(name, id);
+    }
+
+    int markId;
+    char choice;
+    do {
+        cout << "\nMark attendance for Employee ID: ";
+        cin >> markId;
+
+        bool found = false;
+        for (int i = 0; i < n; i++) {
+            if (employees[i]->getId() == markId) {
+                employees[i]->markAttendance();
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            cout << "Invalid Employee ID!\n";
+        }
+
+        cout << "Do you want to mark more attendance? (y/n): ";
+        cin >> choice;
+    } while (choice == 'y' || choice == 'Y');
+
+    cout << "\nAttendance Report:\n";
+    for (int i = 0; i < n; i++) {
+        employees[i]->displayDetails();
+        delete employees[i]; // Free allocated memory
+    }
+
+    return 0;
+}
