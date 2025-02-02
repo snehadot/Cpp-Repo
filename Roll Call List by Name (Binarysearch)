@@ -1,0 +1,107 @@
+#include <iostream>
+using namespace std;
+
+class student {
+    int rollno;
+    string name;
+    float sgpa;
+
+public:
+    void inputdata() {
+        cout << "Enter rollno : ";
+        cin >> rollno;
+        cout << "Enter the name : ";
+        cin >> name;
+        cout << "Enter the sgpa : ";
+        cin >> sgpa;
+        cout << endl;
+    }
+
+    void display() {
+        cout << rollno << "        " << name << "        " << sgpa << endl;
+    }
+    
+    string getname() {
+        return name;
+    }
+};
+
+// Bubble sort function to sort students by name
+void sortByName(student s[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (s[j].getname() > s[j + 1].getname()) {
+                student temp = s[j];
+                s[j] = s[j + 1];
+                s[j + 1] = temp;
+            }
+        }
+    }
+}
+
+// Binary search function to search student by name
+int binarySearch(student s[], int n, string key) {
+    int low = 0, high = n - 1;
+
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        
+        if (s[mid].getname() == key) {
+            return mid;  // Found the student
+        }
+        else if (s[mid].getname() > key) {
+            high = mid - 1;
+        }
+        else {
+            low = mid + 1;
+        }
+    }
+    return -1; // Not found
+}
+
+int main() {
+    cout << "Name: Sneha Nagthane" << endl;
+    cout << "PRN: 202301070115" << endl;
+
+    int n;
+    student s[100];
+    cout << "Enter the number of students: ";
+    cin >> n;
+    cout << endl;
+
+    for (int i = 0; i < n; i++) {
+        cout << "Enter the details of student no. " << i + 1 << endl;
+        s[i].inputdata();
+    }
+    cout << endl;
+
+    // Sorting students by name
+    sortByName(s, n);
+
+    cout << "Sorted Student List:" << endl;
+    cout << "Rollno      Name       SGPA" << endl;
+    cout << "----------------------------" << endl;
+    for (int i = 0; i < n; i++) {
+        s[i].display();
+    }
+    cout << endl;
+
+    // Search by name
+    string key;
+    cout << "Enter the name you want to find: ";
+    cin >> key;
+    cout << endl;
+
+    int index = binarySearch(s, n, key);
+
+    if (index != -1) {
+        cout << "Student found:" << endl;
+        cout << "Rollno      Name       SGPA" << endl;
+        cout << "----------------------------" << endl;
+        s[index].display();
+    } else {
+        cout << "Student with name '" << key << "' not found." << endl;
+    }
+
+    return 0;
+}
