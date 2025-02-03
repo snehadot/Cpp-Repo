@@ -1,0 +1,101 @@
+#include <iostream>
+using namespace std;
+
+class Product {
+public:
+    int productID;
+    string name;
+    float price;
+    int quantity;
+    
+    void setProduct(int id, string pname, float p, int q) {
+        productID = id;
+        name = pname;
+        price = p;
+        quantity = q;
+    }
+    
+    void displayProduct() {
+        cout << "Product ID: " << productID << ", Name: " << name 
+             << ", Price: " << price << ", Quantity: " << quantity << endl;
+    }
+};
+
+int main() {
+    Product cart[10];  
+    int count = 0;  
+    int choice;
+    
+    do {
+        cout << "\n1. Add Product\n2. Remove Product\n3. View Cart\n4. Calculate Total Bill\n5. Exit\nEnter choice: ";
+        cin >> choice;
+        
+        if (choice == 1) {
+            if (count < 10) {
+                int id, qty;
+                string name;
+                float price;
+                cout << "Enter Product ID: ";
+                cin >> id;
+                cout << "Enter Product Name: ";
+                cin >> name;
+                cout << "Enter Price: ";
+                cin >> price;
+                cout << "Enter Quantity: ";
+                cin >> qty;
+                
+                cart[count].setProduct(id, name, price, qty);
+                count++;
+                cout << "Product Added Successfully!\n";
+            } else {
+                cout << "Cart is full!\n";
+            }
+        } 
+        else if (choice == 2) {
+            int id, found = -1;
+            cout << "Enter Product ID to remove: ";
+            cin >> id;
+            
+            for (int i = 0; i < count; i++) {
+                if (cart[i].productID == id) {
+                    found = i;
+                    break;
+                }
+            }
+            
+            if (found != -1) {
+                for (int i = found; i < count - 1; i++) {
+                    cart[i] = cart[i + 1];
+                }
+                count--;
+                cout << "Product Removed Successfully!\n";
+            } else {
+                cout << "Product Not Found!\n";
+            }
+        } 
+        else if (choice == 3) {
+            cout << "\nShopping Cart:\n";
+            if (count == 0) {
+                cout << "Cart is empty!\n";
+            } else {
+                for (int i = 0; i < count; i++) {
+                    cart[i].displayProduct();
+                }
+            }
+        } 
+        else if (choice == 4) {
+            float total = 0;
+            for (int i = 0; i < count; i++) {
+                total += cart[i].price * cart[i].quantity;
+            }
+            cout << "Total Bill: " << total << endl;
+        } 
+        else if (choice != 5) {
+            cout << "Invalid choice! Try again.\n";
+        }
+        
+    } while (choice != 5);
+    
+    cout << "Thank you for shopping!\n";
+    return 0;
+}
