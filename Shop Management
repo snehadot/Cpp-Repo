@@ -1,0 +1,43 @@
+#include <iostream>
+
+using namespace std;
+
+// Define a structure to represent a Product
+struct Product {
+    const char* productName;
+    int productID;
+    double price;
+    int stockQuantity;
+};
+
+// Function to display product details
+void displayDetails(const Product& p) {
+    cout << "Product: " << p.productName << "\n"
+         << "ID: " << p.productID << "\n"
+         << "Price: " << p.price << "\n"
+         << "Stock Available: " << p.stockQuantity << "\n";
+}
+
+// Function to sell a specified quantity of the product
+void sell(Product& p, int quantity) {
+    if (quantity > p.stockQuantity) {
+        cout << "Insufficient stock to sell " << quantity << " units.\n";
+    } else {
+        p.stockQuantity -= quantity;
+        cout << "Selling " << quantity << " units...\n";
+        cout << "Updated Stock: " << p.stockQuantity << "\n";
+    }
+}
+
+int main() {
+    // Creating a product instance
+    Product laptop = {"Laptop", 101, 50000.0, 10};
+
+    // Display initial product details
+    displayDetails(laptop);
+
+    // Selling 3 units of the product
+    sell(laptop, 3);
+
+    return 0;
+}
