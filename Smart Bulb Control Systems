@@ -1,0 +1,65 @@
+#include <iostream>
+using namespace std;
+
+class SmartBulb {
+private:
+    bool status; // ON (true) or OFF (false)
+    int brightness; // 0 to 100
+    string color; // Color of the bulb
+
+public:
+    // Constructor - Initialize with OFF state
+    SmartBulb() {
+        status = false;
+        brightness = 50; // Default brightness
+        color = "White"; // Default color
+    }
+
+    // Function to turn ON the bulb
+    void turnOn() {
+        status = true;
+        cout << "Bulb is now ON.\n";
+    }
+
+    // Function to turn OFF the bulb
+    void turnOff() {
+        status = false;
+        cout << "Bulb is now OFF.\n";
+    }
+
+    // Function to set brightness
+    void setBrightness(int level) {
+        if (level >= 0 && level <= 100) {
+            brightness = level;
+            cout << "Brightness set to " << brightness << "%\n";
+        } else {
+            cout << "Invalid brightness level! Enter a value between 0 and 100.\n";
+        }
+    }
+
+    // Function to set color
+    void setColor(string newColor) {
+        color = newColor;
+        cout << "Bulb color changed to " << color << ".\n";
+    }
+
+    // Function to display current status
+    void displayStatus() {
+        cout << "Bulb Status: " << (status ? "ON" : "OFF") << "\n";
+        cout << "Brightness: " << brightness << "%\n";
+        cout << "Color: " << color << "\n";
+    }
+};
+
+int main() {
+    SmartBulb bulb;
+
+    bulb.displayStatus();
+    bulb.turnOn();
+    bulb.setBrightness(80);
+    bulb.setColor("Blue");
+    bulb.displayStatus();
+    bulb.turnOff();
+
+    return 0;
+}
