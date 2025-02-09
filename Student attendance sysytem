@@ -1,0 +1,64 @@
+#include <iostream>
+using namespace std;
+
+class Student {
+private:
+    int rollNo;
+    string name;
+    int attendance;
+
+public:
+    // Constructor
+    Student(int r, string n) {
+        rollNo = r;
+        name = n;
+        attendance = 0;  // Initially, attendance is 0
+    }
+
+    // Function to mark attendance
+    void markAttendance() {
+        attendance++;
+    }
+
+    // Function to display student details
+    void displayInfo() {
+        cout << "Roll No: " << rollNo << ", Name: " << name 
+             << ", Attendance: " << attendance << " days" << endl;
+    }
+
+    // Function to check attendance percentage (assuming 100 total days)
+    void checkLowAttendance() {
+        if (attendance < 75) {
+            cout << name << " has low attendance (" << attendance 
+                 << " days present)." << endl;
+        }
+    }
+};
+
+int main() {
+    const int numStudents = 3; // Number of students
+    Student students[numStudents] = {
+        Student(1, "Sneha"),
+        Student(2, "Sakshi"),
+        Student(3, "Shiv")
+    };
+
+    // Mark attendance for all students
+    for (int i = 0; i < numStudents; i++) {
+        students[i].markAttendance();
+    }
+
+    // Display student info
+    cout << "\nStudent Attendance Record:\n";
+    for (int i = 0; i < numStudents; i++) {
+        students[i].displayInfo();
+    }
+
+    // Check for low attendance
+    cout << "\nChecking for low attendance:\n";
+    for (int i = 0; i < numStudents; i++) {
+        students[i].checkLowAttendance();
+    }
+
+    return 0;
+}
