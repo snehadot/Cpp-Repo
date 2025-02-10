@@ -1,0 +1,52 @@
+#include <iostream>
+using namespace std;
+
+struct Car {
+    int carID;
+    char model[20];  // Using character array instead of string
+    double rentalPrice;
+    bool available;
+};
+
+// Function to rent a car
+void rentCar(Car &c) {
+    if (c.available) {
+        c.available = false;
+        cout << "Car " << c.model << " (ID: " << c.carID << ") has been rented.\n";
+    } else {
+        cout << "Car is already rented.\n";
+    }
+}
+
+// Function to return a car
+void returnCar(Car &c) {
+    if (!c.available) {
+        c.available = true;
+        cout << "Car " << c.model << " (ID: " << c.carID << ") has been returned.\n";
+    } else {
+        cout << "Car is already available.\n";
+    }
+}
+
+// Function to display car details
+void displayCar(const Car &c) {
+    cout << "Car ID: " << c.carID
+         << "\nModel: " << c.model
+         << "\nRental Price: $" << c.rentalPrice << " per day"
+         << "\nStatus: " << (c.available ? "Available" : "Rented") << "\n\n";
+}
+
+int main() {
+    // Defining cars
+    Car car1 = {101, "Toyota", 50.0, true};
+    Car car2 = {102, "Honda", 60.0, true};
+
+    displayCar(car1);
+    rentCar(car1);
+    displayCar(car1);
+
+    returnCar(car1);
+    displayCar(car1);
+
+    return 0;
+}
