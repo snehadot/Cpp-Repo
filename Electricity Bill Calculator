@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+
+class ElectricityBill {
+public:
+    int units;
+    
+    void getUnits() {
+        cout << "Enter the number of units consumed: ";
+        cin >> units;
+    }
+
+    double calculateBill() {
+        double bill = 0;
+        if (units <= 100) {
+            bill = units * 2;
+        } else if (units <= 300) {
+            bill = (100 * 2) + ((units - 100) * 5);
+        } else {
+            bill = (100 * 2) + (200 * 5) + ((units - 300) * 10);
+        }
+        return bill;
+    }
+
+    void displayBill() {
+        cout << "Total Electricity Bill: ₹" << calculateBill() << endl;
+    }
+};
+
+int main() {
+    ElectricityBill EB;
+    EB.getUnits();
+    EB.displayBill();
+    return 0;
+}
