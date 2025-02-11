@@ -56,13 +56,13 @@ int main() {
                         break;
                     }
                 }
-                cout << "Contact not found.\n";
+                cout << "Contact not found"<<endl;
                 break;
             case 4:
-                cout << "Exiting program.\n";
+                cout << "Exiting program."<<endl;
                 break;
             default:
-                cout << "Invalid choice! Try again.\n";
+                cout << "Invalid choice! Try again."<<endl;
         }
     } while (choice != 4);
 
