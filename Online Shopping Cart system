@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+
+class ShoppingCart {
+private:
+    string itemName;
+    double price;
+    int quantity;
+
+public:
+    ShoppingCart(string name, double p, int q) {
+        itemName = name;
+        price = p;
+        quantity = q;
+    }
+
+    void addItem(int q) {
+        quantity += q;
+        cout << q << " more items added to the cart.\n";
+    }
+
+    void removeItem(int q) {
+        if (q > quantity) {
+            cout << "Cannot remove more items than available!\n";
+        } else {
+            quantity -= q;
+            cout << q << " items removed from the cart.\n";
+        }
+    }
+
+    double calculateTotal() {
+        return price * quantity;
+    }
+
+    void displayCart() {
+        cout << "\nItem: " << itemName
+             << "\nPrice per unit: ₹" << price
+             << "\nQuantity: " << quantity
+             << "\nTotal Cost: ₹" << calculateTotal() << endl;
+    }
+};
+
+int main() {
+    ShoppingCart cart("Laptop", 50000.0, 1);
+
+    cart.displayCart();
+    cart.addItem(2);
+    cart.displayCart();
+    cart.removeItem(1);
+    cart.displayCart();
+
+    return 0;
+}
