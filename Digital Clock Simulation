@@ -1,0 +1,45 @@
+#include <iostream>
+
+using namespace std;
+
+class DigitalClock {
+private:
+    int hours, minutes, seconds;
+
+public:
+    DigitalClock(int h, int m, int s) {
+        hours = h;
+        minutes = m;
+        seconds = s;
+    }
+
+    void updateTime() {
+        seconds++;
+        if (seconds == 60) {
+            seconds = 0;
+            minutes++;
+        }
+        if (minutes == 60) {
+            minutes = 0;
+            hours++;
+        }
+        if (hours == 24) {
+            hours = 0;
+        }
+    }
+
+    void displayTime() {
+        cout << hours << ":" << minutes << ":" << seconds << endl;
+    }
+};
+
+int main() {
+    DigitalClock clock(23, 59, 58);
+    
+    for (int i = 0; i < 5; i++) { // Simulate 5 updates
+        clock.displayTime();
+        clock.updateTime();
+    }
+
+    return 0;
+}
