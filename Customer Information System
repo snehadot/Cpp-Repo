@@ -1,0 +1,289 @@
+/* Name : Sneha Nagthane 
+   PRN : 202301070115
+*/
+#include <iostream>
+using namespace std;
+
+struct Customer {
+    int cId;
+    string name;
+    string itemName;
+    float cost;
+    int flag;
+} c[10];
+
+void inputdata(Customer c[], int &n) {
+    cout << "Enter number of customers: ";
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        cout << "Enter Customer ID: ";
+        cin >> c[i].cId;
+        cout << "Enter Customer Name: ";
+        cin >> c[i].name;
+        cout << "Enter Item Name: ";
+        cin >> c[i].itemName;
+        cout << "Enter Cost: Rs. ";
+        cin >> c[i].cost;
+        c[i].flag = 1;
+    }
+}
+
+void display(Customer c[], int n) // to display list
+{
+    cout << "ID"<<"         "<<"    Name            "<<"Item            "<<"Cost"<<endl;
+    for (int i = 0; i < n; i++) {
+        if (c[i].flag == 1) {
+            cout <<c[i].cId << "            " << c[i].name << "         " << c[i].itemName << "            " << c[i].cost <<endl;
+        }
+    }
+}
+
+void update(Customer c[], int &n) // to add costomer in list
+{
+    cout << "Enter Customer ID: ";
+    cin >> c[n].cId;
+    cout << "Enter Customer Name: ";
+    cin >> c[n].name;
+    cout << "Enter Item Name: ";
+    cin >> c[n].itemName;
+    cout << "Enter Cost: Rs. ";
+    cin >> c[n].cost;
+    c[n].flag = 1;
+    n++;
+}
+
+int search(Customer c[], int n, int key) // to find the costomer in list
+{
+    for (int i = 0; i < n; i++) {
+        if (c[i].cId == key && c[i].flag == 1) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void deleteCustomer(Customer c[], int &n) // to remove id from list
+{
+    int key, index;
+    cout << "Enter ID to delete: ";
+    cin >> key;
+    index = search(c, n, key);
+    c[index].flag = 0;
+    cout << "Record with ID " << key << " is deleted.\n";
+}
+
+void updatename(Customer c[], int n) // to change the name of cutomer
+{
+    int key, index;
+    cout << "Enter Customer ID to update name: ";
+    cin >> key;
+    index = search(c, n, key);
+    cout << "Enter new Name: ";
+    cin >> c[index].name;
+    cout << "Customer name updated successfully!\n";
+}
+
+int main() {
+    int choice, n = 0;
+    cout << "Sneha Nagthane" << endl;
+    cout << "202301070115" << endl;
+
+    while (true) {
+        cout << "\nOperations:\n";
+        cout << "1. Input Customer Data\n";
+        cout << "2. Display Customer Data\n";
+        cout << "3. Update Customer Data\n";
+        cout << "4. Search Customer Data\n";
+        cout << "5. Delete Customer Data\n";
+        cout << "6. Update Customer Name\n";
+        cout << "7. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        if (choice == 7) {
+            cout << "Exiting program.\n";
+            break;
+        }
+
+        switch (choice) {
+            case 1:
+                inputdata(c, n);
+                break;
+            case 2:
+                display(c, n);
+                break;
+            case 3:
+                update(c, n);
+                break;
+            case 4: {
+                int key, index;
+                cout << "Enter Customer ID to search: ";
+                cin >> key;
+                index = search(c, n, key);
+                if (index == -1) {
+                    cout << "Customer ID not found!\n";
+                } else {
+                    cout << "Customer Found:\n";
+                    cout << "ID: " << c[index].cId << ", Name: " << c[index].name << ", Item: " << c[index].itemName << ", Cost: Rs. " << c[index].cost << endl;
+                }
+                break;
+            }
+            case 5:
+                deleteCustomer(c, n);
+                break;
+            case 6:
+                updatename(c, n);
+                break;
+            default:
+                cout << "Invalid choice. Please try again.\n";
+        }
+    }
+    return 0;
+}
+/*
+Sneha Nagthane
+202301070115
+
+Operations:
+1. Input Customer Data
+2. Display Customer Data
+3. Update Customer Data
+4. Search Customer Data
+5. Delete Customer Data
+6. Update Customer Name
+7. Exit
+Enter your choice: 1
+Enter number of customers: 3
+Enter Customer ID: 234
+Enter Customer Name: Sanjay
+Enter Item Name: Laptop
+Enter Cost: Rs. 60000
+Enter Customer ID: 235
+Enter Customer Name: Shriha
+Enter Item Name: Watch
+Enter Cost: Rs. 10000
+Enter Customer ID: 236
+Enter Customer Name: Sakshi
+Enter Item Name: Mobile
+Enter Cost: Rs. 25000
+
+Operations:
+1. Input Customer Data
+2. Display Customer Data
+3. Update Customer Data
+4. Search Customer Data
+5. Delete Customer Data
+6. Update Customer Name
+7. Exit
+Enter your choice: 2
+ID             Name            Item            Cost
+234            Sanjay         Laptop            60000
+235            Shriha         Watch            10000
+236            Sakshi         Mobile            25000
+
+Operations:
+1. Input Customer Data
+2. Display Customer Data
+3. Update Customer Data
+4. Search Customer Data
+5. Delete Customer Data
+6. Update Customer Name
+7. Exit
+Enter your choice: 3
+Enter Customer ID: 237
+Enter Customer Name: Snehaa
+Enter Item Name: Airpod
+Enter Cost: Rs. 15000
+
+Operations:
+1. Input Customer Data
+2. Display Customer Data
+3. Update Customer Data
+4. Search Customer Data
+5. Delete Customer Data
+6. Update Customer Name
+7. Exit
+Enter your choice: 2
+ID             Name            Item            Cost
+234            Sanjay         Laptop            60000
+235            Shriha         Watch            10000
+236            Sakshi         Mobile            25000
+237            Snehaa         Airpod            15000
+
+Operations:
+1. Input Customer Data
+2. Display Customer Data
+3. Update Customer Data
+4. Search Customer Data
+5. Delete Customer Data
+6. Update Customer Name
+7. Exit
+Enter your choice: 4
+Enter Customer ID to search: 235
+Customer Found:
+ID: 235, Name: Shriha, Item: Watch, Cost: Rs. 10000
+
+Operations:
+1. Input Customer Data
+2. Display Customer Data
+3. Update Customer Data
+4. Search Customer Data
+5. Delete Customer Data
+6. Update Customer Name
+7. Exit
+Enter your choice: 5
+Enter ID to delete: 236
+Record with ID 236 is deleted.
+
+Operations:
+1. Input Customer Data
+2. Display Customer Data
+3. Update Customer Data
+4. Search Customer Data
+5. Delete Customer Data
+6. Update Customer Name
+7. Exit
+Enter your choice: 2
+ID             Name            Item            Cost
+234            Sanjay         Laptop            60000
+235            Shriha         Watch            10000
+237            Snehaa         Airpod            15000
+
+Operations:
+1. Input Customer Data
+2. Display Customer Data
+3. Update Customer Data
+4. Search Customer Data
+5. Delete Customer Data
+6. Update Customer Name
+7. Exit
+Enter your choice: 6
+Enter Customer ID to update name: 234
+Enter new Name: Rudraa
+Customer name updated successfully!
+
+Operations:
+1. Input Customer Data
+2. Display Customer Data
+3. Update Customer Data
+4. Search Customer Data
+5. Delete Customer Data
+6. Update Customer Name
+7. Exit
+Enter your choice: 2
+ID             Name            Item            Cost
+234            Rudraa         Laptop            60000
+235            Shriha         Watch            10000
+237            Snehaa         Airpod            15000
+
+Operations:
+1. Input Customer Data
+2. Display Customer Data
+3. Update Customer Data
+4. Search Customer Data
+5. Delete Customer Data
+6. Update Customer Name
+7. Exit
+Enter your choice: 7
+Exiting program.
+*/
