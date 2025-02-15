@@ -1,0 +1,38 @@
+#include <iostream>
+
+using namespace std;
+
+class SIPCalculator {
+public:
+    double monthlyInvestment, annualRate;
+    int months;
+
+    void getInput() {
+        cout << "Enter Monthly Investment Amount (₹): ";
+        cin >> monthlyInvestment;
+        cout << "Enter Annual Interest Rate (%): ";
+        cin >> annualRate;
+        cout << "Enter Investment Duration (Months): ";
+        cin >> months;
+    }
+
+    double calculateMaturity() {
+        double monthlyRate = (annualRate / 12) / 100;
+        double maturityAmount = 0.0;
+        for (int i = 0; i < months; i++) {
+            maturityAmount = (maturityAmount + monthlyInvestment) * (1 + monthlyRate);
+        }
+        return maturityAmount;
+    }
+
+    void displayResult() {
+        cout << "Total Maturity Amount: ₹" << calculateMaturity() << endl;
+    }
+};
+
+int main() {
+    SIPCalculator sip;
+    sip.getInput();
+    sip.displayResult();
+    return 0;
+}
