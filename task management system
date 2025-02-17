@@ -1,0 +1,107 @@
+#include <iostream>
+using namespace std;
+
+const int MAX_TASKS = 10;
+
+class Task {
+public:
+    char taskName[50];
+    int priority;
+    char deadline[20];
+
+    Task() {
+        taskName[0] = '\0';
+        deadline[0] = '\0';
+        priority = 0;
+    }
+
+    void setTask(char name[], int prio, char dueDate[]) {
+        strcpy(taskName, name);
+        priority = prio;
+        strcpy(deadline, dueDate);
+    }
+
+    void displayTask() {
+        cout << "Task: " << taskName << ", Priority: " << priority << ", Deadline: " << deadline << endl;
+    }
+};
+
+class TaskManager {
+private:
+    Task tasks[MAX_TASKS];
+    int taskCount;
+
+    void sortTasksByPriority() {
+        for (int i = 0; i < taskCount - 1; ++i) {
+            for (int j = 0; j < taskCount - 1 - i; ++j) {
+                if (tasks[j].priority < tasks[j + 1].priority) {
+                    Task temp = tasks[j];
+                    tasks[j] = tasks[j + 1];
+                    tasks[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+public:
+    TaskManager() : taskCount(0) {}
+
+    void addTask(char name[], int prio, char deadline[]) {
+        if (taskCount < MAX_TASKS) {
+            tasks[taskCount].setTask(name, prio, deadline);
+            taskCount++;
+            sortTasksByPriority();
+        } else {
+            cout << "Task limit reached!" << endl;
+        }
+    }
+
+    void completeTask() {
+        if (taskCount > 0) {
+            cout << "Task completed: " << tasks[0].taskName << endl;
+            for (int i = 1; i < taskCount; ++i) {
+                tasks[i - 1] = tasks[i];
+            }
+            taskCount--;
+        } else {
+            cout << "No tasks to complete!" << endl;
+        }
+    }
+
+    void viewNextTask() {
+        if (taskCount > 0) {
+            cout << "Next task to complete: " << tasks[0].taskName << ", Priority: " << tasks[0].priority << endl;
+        } else {
+            cout << "No tasks available!" << endl;
+        }
+    }
+
+    void viewAllTasks() {
+        if (taskCount > 0) {
+            cout << "\nAll tasks (sorted by priority):\n";
+            for (int i = 0; i < taskCount; ++i) {
+                tasks[i].displayTask();
+            }
+        } else {
+            cout << "No tasks available!" << endl;
+        }
+    }
+};
+
+int main() {
+    TaskManager manager;
+
+    manager.addTask("Complete assignment", 2, "2025-02-18");
+    manager.addTask("Attend meeting", 1, "2025-02-16");
+    manager.addTask("Submit project report", 3, "2025-02-17");
+
+    manager.viewNextTask();
+
+    manager.viewAllTasks();
+
+    manager.completeTask();
+
+    manager.viewAllTasks();
+
+    return 0;
+}
