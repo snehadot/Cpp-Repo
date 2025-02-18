@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+
+class Patient {
+private:
+    int patientID;
+    string name;
+    int age;
+    string disease;
+
+public:
+    // Function to add patient details
+    void addPatient(int id, string n, int a, string d) {
+        patientID = id;
+        name = n;
+        age = a;
+        disease = d;
+    }
+
+    // Function to update patient details
+    void updatePatient(string n, int a, string d) {
+        name = n;
+        age = a;
+        disease = d;
+    }
+
+    // Function to display patient details
+    void displayPatient() {
+        cout << "\nPatient ID: " << patientID;
+        cout << "\nName: " << name;
+        cout << "\nAge: " << age;
+        cout << "\nDisease: " << disease << "\n";
+    }
+};
+
+int main() {
+    Patient p1;
+
+    // Adding patient details
+    p1.addPatient(101, "Sneha Nagthane", 20, "Flu");
+
+    // Displaying patient details
+    cout << "Patient Record:\n";
+    p1.displayPatient();
+
+    // Updating patient details
+    p1.updatePatient("Sneha Nagthane", 20, "Recovered");
+
+    // Displaying updated details
+    cout << "\nUpdated Patient Record:\n";
+    p1.displayPatient();
+
+    return 0;
+}
