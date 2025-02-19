@@ -1,0 +1,51 @@
+#include <iostream>
+
+using namespace std;
+
+struct Task {
+    char description[50];
+    bool completed;
+};
+
+int main() {
+    Task tasks[10];
+    int count = 0, choice;
+
+    do {
+        cout << "\nTo-Do List Menu:\n";
+        cout << "1. Add Task\n";
+        cout << "2. Mark Task as Completed\n";
+        cout << "3. View Tasks\n";
+        cout << "4. Exit\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+        cin.ignore();
+
+        if (choice == 1) {
+            if (count < 10) {
+                cout << "Enter task description: ";
+                cin.getline(tasks[count].description, 50);
+                tasks[count].completed = false;
+                count++;
+            } else {
+                cout << "Task list is full!\n";
+            }
+        } 
+        else if (choice == 2) {
+            int num;
+            cout << "Enter task number to mark as completed: ";
+            cin >> num;
+            if (num > 0 && num <= count)
+                tasks[num - 1].completed = true;
+        } 
+        else if (choice == 3) {
+            cout << "\nTo-Do List:\n";
+            for (int i = 0; i < count; i++) {
+                cout << i + 1 << ". " << tasks[i].description;
+                cout << (tasks[i].completed ? " [Completed]\n" : " [Pending]\n");
+            }
+        }
+    } while (choice != 4);
+
+    return 0;
+}
