@@ -1,0 +1,79 @@
+#include <iostream>
+using namespace std;
+
+class Product {
+private:
+    int productID;
+    string name;
+    float price;
+    int stockQuantity;
+
+public:
+    // Function to add product details
+    void addProduct() {
+        cout << "Enter Product ID: ";
+        cin >> productID;
+        cout << "Enter Product Name: ";
+        cin.ignore();
+        getline(cin, name);
+        cout << "Enter Price: ";
+        cin >> price;
+        cout << "Enter Stock Quantity: ";
+        cin >> stockQuantity;
+    }
+
+    // Function to display product details
+    void displayProduct() {
+        cout << "Product ID: " << productID 
+             << ", Name: " << name 
+             << ", Price: " << price 
+             << ", Stock: " << stockQuantity << endl;
+    }
+
+    // Function to update stock
+    void updateStock(int quantity) {
+        if (quantity <= stockQuantity) {
+            stockQuantity -= quantity;
+            cout << "Updated Stock for " << name << ": " << stockQuantity << endl;
+        } else {
+            cout << "Insufficient stock available!" << endl;
+        }
+    }
+
+    int getProductID() {
+        return productID;
+    }
+};
+
+int main() {
+    int n;
+    cout << "Enter number of products to add: ";
+    cin >> n;
+
+    Product products[n];
+
+    for (int i = 0; i < n; i++) {
+        cout << "\nEnter details for Product " << i + 1 << ":\n";
+        products[i].addProduct();
+    }
+    cout << "\nAvailable Products:\n";
+    for (int i = 0; i < n; i++) {
+        products[i].displayProduct();
+    }
+
+    // Updating stock
+    int id, quantity;
+    cout << "\nEnter Product ID to update stock: ";
+    cin >> id;
+    cout << "Enter quantity sold: ";
+    cin >> quantity;
+
+    for (int i = 0; i < n; i++) {
+        if (products[i].getProductID() == id) {
+            products[i].updateStock(quantity);
+            break;
+        }
+    }
+
+    return 0;
+}
