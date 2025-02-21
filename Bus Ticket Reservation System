@@ -1,0 +1,69 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Bus {
+private:
+    int busNumber;
+    string driverName;
+    int totalSeats;
+    int availableSeats;
+
+public:
+    // Constructor to initialize the bus details
+    Bus(int num, string driver, int seats)
+        : busNumber(num), driverName(driver), totalSeats(seats), availableSeats(seats) {}
+
+    // Function to book tickets
+    void bookTicket(int seats) {
+        if(seats <= availableSeats) {
+            availableSeats -= seats;
+            cout << seats << " ticket(s) successfully booked." << endl;
+        } else {
+            cout << "Booking failed: Only " << availableSeats << " seat(s) available." << endl;
+        }
+    }
+
+    // Function to cancel tickets
+    void cancelTicket(int seats) {
+        if(availableSeats + seats <= totalSeats) {
+            availableSeats += seats;
+            cout << seats << " ticket(s) successfully canceled." << endl;
+        } else {
+            cout << "Cancellation failed: Cannot exceed total seats (" << totalSeats << ")." << endl;
+        }
+    }
+
+    // Function to display bus information
+    void displayBusInfo() {
+        cout << "Bus Number: " << busNumber << endl;
+        cout << "Driver Name: " << driverName << endl;
+        cout << "Total Seats: " << totalSeats << endl;
+        cout << "Available Seats: " << availableSeats << endl;
+    }
+};
+
+int main() {
+    // Creating a Bus object with bus number 101, driver "John Doe", and 40 seats.
+    Bus bus(101, "John Doe", 40);
+
+    // Display initial bus information
+    bus.displayBusInfo();
+    cout << endl;
+
+    // Attempt to book 5 tickets
+    bus.bookTicket(5);
+    bus.displayBusInfo();
+    cout << endl;
+
+    // Attempt to cancel 2 tickets
+    bus.cancelTicket(2);
+    bus.displayBusInfo();
+    cout << endl;
+
+    // Attempt to book more tickets than available
+    bus.bookTicket(38);
+    bus.displayBusInfo();
+
+    return 0;
+}
