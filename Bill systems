@@ -1,0 +1,46 @@
+#include <iostream>
+using namespace std;
+
+class Bill {
+private:
+    double price;
+    int quantity;
+
+public:
+    // Constructor to initialize values
+    Bill(double p, int q) {
+        price = p;
+        quantity = q;
+    }
+
+    // Method to calculate total bill
+    double calculateTotal() {
+        return price * quantity;
+    }
+
+    // Method to display the bill details
+    void displayBill() {
+        cout << "Item Price: " << price << endl;
+        cout << "Quantity: " << quantity << endl;
+        cout << "Total Bill: " << calculateTotal() << endl;
+    }
+};
+
+int main() {
+    double price;
+    int quantity;
+
+    // Taking input from user
+    cout << "Enter item price: ";
+    cin >> price;
+    cout << "Enter quantity: ";
+    cin >> quantity;
+
+    // Creating an object of Bill class
+    Bill customerBill(price, quantity);
+
+    // Displaying the bill details
+    customerBill.displayBill();
+
+    return 0;
+}
