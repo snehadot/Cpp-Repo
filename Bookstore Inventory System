@@ -1,0 +1,63 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Book {
+private:
+    string title, author;
+    float price;
+    int stock;
+
+public:
+    // Constructor
+    Book(string t, string a, float p, int s) {
+        title = t;
+        author = a;
+        price = p;
+        stock = s;
+    }
+
+    // Function to display book details
+    void displayBook() {
+        cout << "\nTitle: " << title;
+        cout << "\nAuthor: " << author;
+        cout << "\nPrice: $" << price;
+        cout << "\nStock Available: " << stock << "\n";
+    }
+
+    // Function to check availability
+    bool isAvailable(int qty) {
+        return (stock >= qty);
+    }
+
+    // Function to sell book and update stock
+    void sellBook(int qty) {
+        if (isAvailable(qty)) {
+            stock -= qty;
+            cout << "\n" << qty << " copies sold successfully!";
+            cout << "\nTotal Price: $" << (price * qty) << "\n";
+        } else {
+            cout << "\nNot enough stock available!";
+        }
+    }
+};
+
+int main() {
+    // Create a sample book
+    Book book1("C++ Programming", "Bjarne Stroustrup", 45.99, 10);
+
+    // Display book details
+    book1.displayBook();
+
+    // Sell a book
+    int qty;
+    cout << "\nEnter quantity to purchase: ";
+    cin >> qty;
+
+    book1.sellBook(qty);
+
+    // Display updated stock
+    book1.displayBook();
+
+    return 0;
+}
