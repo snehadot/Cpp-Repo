@@ -1,0 +1,63 @@
+#include <iostream>
+using namespace std;
+
+class Car {
+private:
+    string model;
+    float price;
+    int stock;
+
+public:
+    void inputDetails() {
+        cout << "Enter car model: ";
+        cin >> model;
+        cout << "Enter car price: ";
+        cin >> price;
+        cout << "Enter available stock: ";
+        cin >> stock;
+    }
+
+    void sellCar(int quantity) {
+        if (quantity <= stock) {
+            stock -= quantity;
+            cout << quantity << " car(s) sold successfully!\n";
+        } else {
+            cout << "Insufficient stock available!\n";
+        }
+    }
+
+    void displayCar() {
+        cout << "\nCar Model: " << model;
+        cout << "\nPrice: $" << price;
+        cout << "\nAvailable Stock: " << stock << "\n";
+    }
+};
+
+int main() {
+    Car c;
+    c.inputDetails();
+    
+    int choice, qty;
+    do {
+        cout << "\n1. Sell Car\n2. Display Car Details\n3. Exit\nEnter choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter quantity to sell: ";
+                cin >> qty;
+                c.sellCar(qty);
+                break;
+            case 2:
+                c.displayCar();
+                break;
+            case 3:
+                cout << "Exiting...\n";
+                break;
+            default:
+                cout << "Invalid choice!\n";
+        }
+    } while (choice != 3);
+
+    return 0;
+}
