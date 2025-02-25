@@ -1,0 +1,34 @@
+#include <iostream>
+using namespace std;
+
+class InterestCalculator {
+private:
+    double principal, rate, time;
+
+public:
+    void getInput() {
+        cout << "Enter Principal Amount: ";
+        cin >> principal;
+        cout << "Enter Rate of Interest (%): ";
+        cin >> rate;
+        cout << "Enter Time (in years): ";
+        cin >> time;
+    }
+
+    double calculateInterest() {
+        return (principal * rate * time) / 100;
+    }
+
+    void displayResult() {
+        double interest = calculateInterest();
+        cout << "Simple Interest: " << interest << endl;
+        cout << "Total Amount: " << (principal + interest) << endl;
+    }
+};
+
+int main() {
+    InterestCalculator obj;
+    obj.getInput();
+    obj.displayResult();
+    return 0;
+}
