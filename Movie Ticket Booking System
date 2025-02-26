@@ -1,0 +1,70 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class MovieTicket {
+private:
+    string movieName;
+    string showTime;
+    int seatNumber;
+    bool isBooked;
+
+public:
+    // Constructor
+    MovieTicket(string m, string t, int s) {
+        movieName = m;
+        showTime = t;
+        seatNumber = s;
+        isBooked = false; // Initially, seat is available
+    }
+
+    // Function to book a ticket
+    void bookTicket() {
+        if (!isBooked) {
+            isBooked = true;
+            cout << "Ticket booked successfully for " << movieName << " at " << showTime << ", Seat No: " << seatNumber << endl;
+        } else {
+            cout << "Sorry, this seat is already booked!" << endl;
+        }
+    }
+
+    // Function to cancel a ticket
+    void cancelTicket() {
+        if (isBooked) {
+            isBooked = false;
+            cout << "Ticket for Seat No: " << seatNumber << " has been cancelled." << endl;
+        } else {
+            cout << "No booking found for this seat!" << endl;
+        }
+    }
+
+    // Function to display ticket details
+    void displayTicket() {
+        cout << "\nMovie: " << movieName << "\nShow Time: " << showTime 
+             << "\nSeat Number: " << seatNumber 
+             << "\nStatus: " << (isBooked ? "Booked" : "Available") << endl;
+    }
+};
+
+int main() {
+    // Creating an example ticket
+    MovieTicket ticket1("Chavva", "7:30 PM", 10);
+
+    // Display initial status
+    ticket1.displayTicket();
+
+    // Booking the ticket
+    ticket1.bookTicket();
+    
+    // Display updated status
+    ticket1.displayTicket();
+
+    // Cancelling the ticket
+    ticket1.cancelTicket();
+
+    // Display final status
+    ticket1.displayTicket();
+
+    return 0;
+}
