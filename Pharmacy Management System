@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+class Medicine {
+private:
+    string name;
+    float price;
+    int quantity;
+
+public:
+    // Function to input medicine details
+    void inputDetails() {
+        cout << "Enter Medicine Name: ";
+        cin >> name;
+        cout << "Enter Price per unit: ";
+        cin >> price;
+        cout << "Enter Quantity: ";
+        cin >> quantity;
+    }
+
+    // Function to calculate total cost
+    float calculateTotalCost() {
+        return price * quantity;
+    }
+
+    // Function to display details
+    void displayDetails() {
+        cout << "\nMedicine Details:\n";
+        cout << "Name: " << name << endl;
+        cout << "Price per unit: ₹" << price << endl;
+        cout << "Quantity: " << quantity << endl;
+        cout << "Total Cost: ₹" << calculateTotalCost() << endl;
+    }
+};
+
+int main() {
+    Medicine med;
+    med.inputDetails();
+    med.displayDetails();
+    return 0;
+}
