@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+
+class FlightTicket {
+private:
+    string passengerName;
+    string flightNumber;
+    string destination;
+    double ticketPrice;
+
+public:
+    void bookTicket() {
+        cout << "Enter Passenger Name: ";
+        cin >> passengerName;
+        cout << "Enter Flight Number: ";
+        cin >> flightNumber;
+        cout << "Enter Destination: ";
+        cin >> destination;
+        cout << "Enter Ticket Price: ";
+        cin >> ticketPrice;
+    }
+
+    void displayTicket() {
+        cout << "\nTicket Details:\n";
+        cout << "Passenger Name: " << passengerName << endl;
+        cout << "Flight Number: " << flightNumber << endl;
+        cout << "Destination: " << destination << endl;
+        cout << "Ticket Price: " << ticketPrice << endl;
+    }
+};
+
+int main() {
+    FlightTicket ticket;
+    ticket.bookTicket();
+    ticket.displayTicket();
+    return 0;
+}
