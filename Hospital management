@@ -1,0 +1,88 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Patient {
+public:
+    string name;
+    int age;
+    string disease;
+    bool admitted;
+
+    Patient() {
+        name = "";
+        age = 0;
+        disease = "";
+        admitted = false;
+    }
+
+    void addPatient() {
+        cout << "Enter Patient Name: ";
+        cin >> name;
+        cout << "Enter Age: ";
+        cin >> age;
+        cout << "Enter Disease: ";
+        cin >> disease;
+        admitted = true;
+        cout << "Patient added successfully!\n";
+    }
+
+    void displayPatient() {
+        if (admitted) {
+            cout << "Name: " << name << ", Age: " << age 
+                 << ", Disease: " << disease << ", Status: Admitted\n";
+        }
+    }
+
+    void dischargePatient() {
+        if (admitted) {
+            admitted = false;
+            cout << name << " has been discharged.\n";
+        } else {
+            cout << "No patient to discharge.\n";
+        }
+    }
+};
+
+int main() {
+    Patient hospital[5]; // Maximum 5 patients
+    int choice, count = 0;
+
+    do {
+        cout << "\n--- Hospital Management System ---\n";
+        cout << "1. Add New Patient\n2. View Patients\n3. Discharge Patient\n4. Exit\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                if (count < 5) {
+                    hospital[count].addPatient();
+                    count++;
+                } else {
+                    cout << "No more beds available!\n";
+                }
+                break;
+            case 2:
+                for (int i = 0; i < count; i++) {
+                    hospital[i].displayPatient();
+                }
+                break;
+            case 3:
+                if (count > 0) {
+                    hospital[count - 1].dischargePatient();
+                    count--;
+                } else {
+                    cout << "No patients admitted!\n";
+                }
+                break;
+            case 4:
+                cout << "Exiting system...\n";
+                break;
+            default:
+                cout << "Invalid choice!\n";
+        }
+    } while (choice != 4);
+
+    return 0;
+}
