@@ -1,0 +1,59 @@
+#include <iostream>
+using namespace std;
+
+class MenuItem {
+public:
+    string name;
+    float price;
+    
+    MenuItem(string n, float p) {
+        name = n;
+        price = p;
+    }
+};
+
+class Restaurant {
+private:
+    MenuItem menu[3] = {
+        MenuItem("Pizza", 250.0),
+        MenuItem("Burger", 120.0),
+        MenuItem("Pasta", 180.0)
+    };
+    float totalBill = 0;
+
+public:
+    void displayMenu() {
+        cout << "----- Restaurant Menu -----\n";
+        for (int i = 0; i < 3; i++) {
+            cout << i + 1 << ". " << menu[i].name << " - Rs. " << menu[i].price << endl;
+        }
+    }
+
+    void takeOrder() {
+        int choice, quantity;
+        cout << "\nEnter item number to order (0 to finish): ";
+        while (true) {
+            cin >> choice;
+            if (choice == 0) break;
+            if (choice >= 1 && choice <= 3) {
+                cout << "Enter quantity: ";
+                cin >> quantity;
+                totalBill += menu[choice - 1].price * quantity;
+            } else {
+                cout << "Invalid choice. Try again.\n";
+            }
+        }
+    }
+
+    void generateBill() {
+        cout << "\nTotal Bill: Rs. " << totalBill << endl;
+    }
+};
+
+int main() {
+    Restaurant res;
+    res.displayMenu();
+    res.takeOrder();
+    res.generateBill();
+    return 0;
+}
