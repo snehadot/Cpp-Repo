@@ -1,0 +1,58 @@
+#include <iostream>
+using namespace std;
+
+class Medicine {
+public:
+    string name;
+    float price;
+    int stock;
+
+    Medicine(string n = "", float p = 0.0, int s = 0) {
+        name = n;
+        price = p;
+        stock = s;
+    }
+};
+
+class Pharmacy {
+private:
+    Medicine medicines[3] = {
+        Medicine("Paracetamol", 50.0, 10),
+        Medicine("Antibiotic", 120.0, 5),
+        Medicine("Cough Syrup", 80.0, 7)
+    };
+
+public:
+    void displayMedicines() {
+        cout << "----- Available Medicines -----\n";
+        for (int i = 0; i < 3; i++) {
+            cout << i + 1 << ". " << medicines[i].name << " - Rs. " << medicines[i].price 
+                 << " (Stock: " << medicines[i].stock << ")\n";
+        }
+    }
+
+    void sellMedicine() {
+        int choice, quantity;
+        cout << "\nEnter medicine number to buy (0 to cancel): ";
+        cin >> choice;
+        if (choice >= 1 && choice <= 3) {
+            cout << "Enter quantity: ";
+            cin >> quantity;
+            if (medicines[choice - 1].stock >= quantity) {
+                medicines[choice - 1].stock -= quantity;
+                cout << "Total Price: Rs. " << medicines[choice - 1].price * quantity << endl;
+            } else {
+                cout << "Insufficient stock!\n";
+            }
+        } else {
+            cout << "Invalid choice!\n";
+        }
+    }
+};
+
+int main() {
+    Pharmacy pharmacy;
+    pharmacy.displayMedicines();
+    pharmacy.sellMedicine();
+    return 0;
+}
