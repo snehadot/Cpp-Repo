@@ -1,0 +1,107 @@
+#include <iostream>
+using namespace std;
+
+class Car {
+public:
+    string ownerName, carModel, carNumber;
+
+    void getCarDetails() {
+        cout << "Enter Owner's Name: ";
+        cin >> ownerName;
+        cout << "Enter Car Model: ";
+        cin >> carModel;
+        cout << "Enter Car Number: ";
+        cin >> carNumber;
+    }
+
+    void displayCarDetails() {
+        cout << "Owner: " << ownerName << "\nCar Model: " << carModel 
+             << "\nCar Number: " << carNumber << endl;
+    }
+};
+
+class Service {
+public:
+    string serviceType;
+    float cost;
+
+    void setService(string type, float price) {
+        serviceType = type;
+        cost = price;
+    }
+
+    void displayService() {
+        cout << "Service: " << serviceType << " | Cost: Rs." << cost << endl;
+    }
+};
+
+class ServiceCenter {
+private:
+    float totalBill;
+public:
+    Service services[3];
+
+    ServiceCenter() {
+        services[0].setService("Oil Change", 1500);
+        services[1].setService("Tire Replacement", 3000);
+        services[2].setService("Engine Checkup", 2000);
+        totalBill = 0;
+    }
+
+    void displayServices() {
+        cout << "Available Services:\n";
+        for (int i = 0; i < 3; i++) {
+            cout << i + 1 << ". ";
+            services[i].displayService();
+        }
+    }
+
+    void bookService(int choice) {
+        if (choice < 1 || choice > 3) {
+            cout << "Invalid choice!\n";
+            return;
+        }
+        totalBill += services[choice - 1].cost;
+        cout << "Service Booked: " << services[choice - 1].serviceType << endl;
+    }
+
+    void generateInvoice(Car car) {
+        cout << "\n===== Invoice =====\n";
+        car.displayCarDetails();
+        cout << "Total Bill: Rs." << totalBill << endl;
+    }
+};
+
+int main() {
+    Car car;
+    ServiceCenter center;
+
+    car.getCarDetails();
+    int choice;
+    do {
+        cout << "\n1. View Services\n2. Book Service\n3. Generate Invoice\n4. Exit\nEnter choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                center.displayServices();
+                break;
+            case 2:
+                cout << "Enter service number to book: ";
+                int serviceChoice;
+                cin >> serviceChoice;
+                center.bookService(serviceChoice);
+                break;
+            case 3:
+                center.generateInvoice(car);
+                break;
+            case 4:
+                cout << "Thank you for using our service!\n";
+                break;
+            default:
+                cout << "Invalid choice!\n";
+        }
+    } while (choice != 4);
+
+    return 0;
+}
