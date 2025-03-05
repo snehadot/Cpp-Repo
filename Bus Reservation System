@@ -1,0 +1,96 @@
+#include <iostream>
+using namespace std;
+
+class Bus {
+public:
+    int busID;
+    string busName;
+    int totalSeats;
+    int availableSeats;
+
+    Bus(int id, string name, int seats) {
+        busID = id;
+        busName = name;
+        totalSeats = seats;
+        availableSeats = seats;
+    }
+
+    void displayBus() {
+        cout << "Bus ID: " << busID << " | Name: " << busName
+             << " | Available Seats: " << availableSeats << "/" << totalSeats << endl;
+    }
+
+    bool bookSeat() {
+        if (availableSeats > 0) {
+            availableSeats--;
+            cout << "Seat booked successfully!\n";
+            return true;
+        } else {
+            cout << "No seats available.\n";
+            return false;
+        }
+    }
+
+    bool cancelBooking() {
+        if (availableSeats < totalSeats) {
+            availableSeats++;
+            cout << "Booking canceled successfully!\n";
+            return true;
+        } else {
+            cout << "No bookings to cancel.\n";
+            return false;
+        }
+    }
+};
+
+int main() {
+    Bus buses[] = {
+        Bus(101, "Express A", 40),
+        Bus(102, "Express B", 30),
+        Bus(103, "Express C", 35)
+    };
+
+    int choice, busID;
+    while (true) {
+        cout << "\n1. View Buses\n2. Book a Seat\n3. Cancel Booking\n4. Exit\nEnter choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "\nAvailable Buses:\n";
+                for (auto &bus : buses) {
+                    bus.displayBus();
+                }
+                break;
+
+            case 2:
+                cout << "Enter Bus ID to book a seat: ";
+                cin >> busID;
+                for (auto &bus : buses) {
+                    if (bus.busID == busID) {
+                        bus.bookSeat();
+                        break;
+                    }
+                }
+                break;
+
+            case 3:
+                cout << "Enter Bus ID to cancel booking: ";
+                cin >> busID;
+                for (auto &bus : buses) {
+                    if (bus.busID == busID) {
+                        bus.cancelBooking();
+                        break;
+                    }
+                }
+                break;
+
+            case 4:
+                cout << "Exiting...\n";
+                return 0;
+
+            default:
+                cout << "Invalid choice! Try again.\n";
+        }
+    }
+}
