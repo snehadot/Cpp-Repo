@@ -1,0 +1,77 @@
+#include <iostream>
+using namespace std;
+
+class Product {
+public:
+    int id;
+    string name;
+    float price;
+
+    Product(int i, string n, float p) {
+        id = i;
+        name = n;
+        price = p;
+    }
+};
+
+class Billing {
+private:
+    Product products[5] = {
+        {1, "Milk", 50.0},
+        {2, "Bread", 30.0},
+        {3, "Eggs", 70.0},
+        {4, "Rice", 100.0},
+        {5, "Sugar", 40.0}
+    };
+    float totalBill = 0;
+
+public:
+    void displayProducts() {
+        cout << "\nAvailable Products:\n";
+        cout << "ID\tName\tPrice\n";
+        for (int i = 0; i < 5; i++) {
+            cout << products[i].id << "\t" << products[i].name << "\t" << products[i].price << " Rs\n";
+        }
+    }
+
+    void generateBill() {
+        int choice, quantity;
+        char more;
+        do {
+            cout << "\nEnter Product ID to purchase: ";
+            cin >> choice;
+            cout << "Enter quantity: ";
+            cin >> quantity;
+
+            bool found = false;
+            for (int i = 0; i < 5; i++) {
+                if (products[i].id == choice) {
+                    totalBill += products[i].price * quantity;
+                    cout << quantity << " " << products[i].name << " added to cart.\n";
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                cout << "Invalid Product ID. Try again.\n";
+            }
+
+            cout << "Do you want to add more items? (y/n): ";
+            cin >> more;
+        } while (more == 'y' || more == 'Y');
+
+        float tax = totalBill * 0.05; // 5% tax
+        float finalAmount = totalBill + tax;
+
+        cout << "\nTotal Bill: " << totalBill << " Rs";
+        cout << "\nTax (5%): " << tax << " Rs";
+        cout << "\nFinal Amount: " << finalAmount << " Rs\n";
+    }
+};
+
+int main() {
+    Billing bill;
+    bill.displayProducts();
+    bill.generateBill();
+    return 0;
+}
