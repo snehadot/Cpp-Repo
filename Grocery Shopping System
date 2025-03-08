@@ -1,0 +1,58 @@
+#include <iostream>
+using namespace std;
+
+class GroceryItem {
+public:
+    string name;
+    float price;
+    int quantity;
+
+    void getDetails() {
+        cout << "Enter item name: ";
+        cin >> name;
+        cout << "Enter price: ";
+        cin >> price;
+        cout << "Enter quantity: ";
+        cin >> quantity;
+    }
+
+    float getTotal() {
+        return price * quantity;
+    }
+};
+
+int main() {
+    int n;
+    cout << "Enter number of items: ";
+    cin >> n;
+
+    GroceryItem items[n];
+    float totalBill = 0;
+
+    for (int i = 0; i < n; i++) {
+        items[i].getDetails();
+        totalBill += items[i].getTotal();
+    }
+
+    // Applying discount
+    float discount = 0;
+    if (totalBill > 1000) {
+        discount = totalBill * 0.10;
+    } else if (totalBill > 500) {
+        discount = totalBill * 0.05;
+    }
+
+    float finalAmount = totalBill - discount;
+
+    // Display bill summary
+    cout << "\nBill Summary:\n";
+    for (int i = 0; i < n; i++) {
+        cout << items[i].name << "  x" << items[i].quantity << "  = ₹" << items[i].getTotal() << endl;
+    }
+
+    cout << "Total Bill: ₹" << totalBill << endl;
+    cout << "Discount: ₹" << discount << endl;
+    cout << "Final Amount: ₹" << finalAmount << endl;
+
+    return 0;
+}
