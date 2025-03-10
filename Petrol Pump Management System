@@ -1,0 +1,118 @@
+#include <iostream>
+using namespace std;
+
+class PetrolPump {
+private:
+    float petrolPrice, dieselPrice, cngPrice;
+    float petrolStock, dieselStock, cngStock;
+
+public:
+    PetrolPump() {
+        // Initializing fuel prices and stock
+        petrolPrice = 100.0;
+        dieselPrice = 90.0;
+        cngPrice = 60.0;
+
+        petrolStock = 500.0;
+        dieselStock = 600.0;
+        cngStock = 400.0;
+    }
+
+    void updatePrices() {
+        cout << "Enter new price for Petrol: ";
+        cin >> petrolPrice;
+        cout << "Enter new price for Diesel: ";
+        cin >> dieselPrice;
+        cout << "Enter new price for CNG: ";
+        cin >> cngPrice;
+        cout << "Prices updated successfully!\n";
+    }
+
+    void addStock() {
+        float petrolAdd, dieselAdd, cngAdd;
+        cout << "Enter Petrol stock to add: ";
+        cin >> petrolAdd;
+        petrolStock += petrolAdd;
+
+        cout << "Enter Diesel stock to add: ";
+        cin >> dieselAdd;
+        dieselStock += dieselAdd;
+
+        cout << "Enter CNG stock to add: ";
+        cin >> cngAdd;
+        cngStock += cngAdd;
+
+        cout << "Stock updated successfully!\n";
+    }
+
+    void purchaseFuel() {
+        int choice;
+        float liters, cost;
+        cout << "\nAvailable Fuel Types:\n1. Petrol\n2. Diesel\n3. CNG\nEnter your choice: ";
+        cin >> choice;
+
+        cout << "Enter quantity in liters: ";
+        cin >> liters;
+
+        switch (choice) {
+            case 1:
+                if (liters > petrolStock) {
+                    cout << "Not enough Petrol in stock!\n";
+                    return;
+                }
+                cost = liters * petrolPrice;
+                petrolStock -= liters;
+                break;
+            case 2:
+                if (liters > dieselStock) {
+                    cout << "Not enough Diesel in stock!\n";
+                    return;
+                }
+                cost = liters * dieselPrice;
+                dieselStock -= liters;
+                break;
+            case 3:
+                if (liters > cngStock) {
+                    cout << "Not enough CNG in stock!\n";
+                    return;
+                }
+                cost = liters * cngPrice;
+                cngStock -= liters;
+                break;
+            default:
+                cout << "Invalid choice!\n";
+                return;
+        }
+        cout << "Total Bill: Rs. " << cost << "\nThank you for your purchase!\n";
+    }
+
+    void displayStock() {
+        cout << "\nCurrent Fuel Stock:\n";
+        cout << "Petrol: " << petrolStock << " liters | Price: Rs. " << petrolPrice << "/L\n";
+        cout << "Diesel: " << dieselStock << " liters | Price: Rs. " << dieselPrice << "/L\n";
+        cout << "CNG: " << cngStock << " liters | Price: Rs. " << cngPrice << "/L\n";
+    }
+};
+
+int main() {
+    PetrolPump pump;
+    int choice;
+
+    do {
+        cout << "\n---- Petrol Pump Management ----\n";
+        cout << "1. Purchase Fuel\n2. Update Fuel Prices (Owner)\n3. Add Stock (Owner)\n4. View Stock\n5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: pump.purchaseFuel(); break;
+            case 2: pump.updatePrices(); break;
+            case 3: pump.addStock(); break;
+            case 4: pump.displayStock(); break;
+            case 5: cout << "Exiting...\n"; break;
+            default: cout << "Invalid choice! Try again.\n";
+        }
+    } while (choice != 5);
+
+    return 0;
+}
