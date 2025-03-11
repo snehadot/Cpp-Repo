@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+class WaterBill {
+public:
+    string customerName;
+    int usageLiters;
+
+    void getDetails() {
+        cout << "Enter customer name: ";
+        cin >> customerName;
+        cout << "Enter water usage (in liters): ";
+        cin >> usageLiters;
+    }
+
+    float calculateBill() {
+        float bill = 0;
+
+        if (usageLiters <= 10000) {
+            bill = (usageLiters / 1000.0) * 5;
+        } else if (usageLiters <= 30000) {
+            bill = (10000 / 1000.0) * 5 + ((usageLiters - 10000) / 1000.0) * 7;
+        } else {
+            bill = (10000 / 1000.0) * 5 + (20000 / 1000.0) * 7 + ((usageLiters - 30000) / 1000.0) * 10;
+        }
+
+        return bill;
+    }
+
+    void displayBill() {
+        float totalBill = calculateBill();
+        cout << "\nWater Bill Summary:\n";
+        cout << "Customer Name: " << customerName << endl;
+        cout << "Water Usage: " << usageLiters << " liters" << endl;
+        cout << "Total Bill: ₹" << totalBill << endl;
+    }
+};
+
+int main() {
+    WaterBill wb;
+    wb.getDetails();
+    wb.displayBill();
+    return 0;
+}
