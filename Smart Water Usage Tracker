@@ -1,0 +1,72 @@
+#include <iostream>
+using namespace std;
+
+class WaterTracker {
+    float dailyUsage[7]; // Stores water consumption for a week
+    int daysLogged;
+
+public:
+    WaterTracker() : daysLogged(0) {
+        for (int i = 0; i < 7; i++) {
+            dailyUsage[i] = 0;
+        }
+    }
+
+    void logWaterUsage() {
+        if (daysLogged >= 7) {
+            cout << "You have already logged for the full week!\n";
+            return;
+        }
+        cout << "Enter water usage in liters for day " << (daysLogged + 1) << ": ";
+        cin >> dailyUsage[daysLogged];
+        daysLogged++;
+        cout << "Logged successfully!\n";
+    }
+
+    void viewTotalConsumption() {
+        float total = 0;
+        for (int i = 0; i < daysLogged; i++) {
+            total += dailyUsage[i];
+        }
+        cout << "Total water consumption for " << daysLogged << " days: " << total << " liters.\n";
+    }
+
+    void getWaterSavingTip() {
+        float total = 0;
+        for (int i = 0; i < daysLogged; i++) {
+            total += dailyUsage[i];
+        }
+        float avg = (daysLogged > 0) ? (total / daysLogged) : 0;
+
+        cout << "Your average daily usage: " << avg << " liters.\n";
+        if (avg > 100) {
+            cout << "Tip: Reduce shower time and fix leaks to save water!\n";
+        } else if (avg > 50) {
+            cout << "Tip: Use a bucket instead of running tap water for washing!\n";
+        } else {
+            cout << "Great job! You're using water efficiently!\n";
+        }
+    }
+};
+
+int main() {
+    WaterTracker tracker;
+    int choice;
+
+    do {
+        cout << "\nSmart Water Usage Tracker\n";
+        cout << "1. Log Water Usage\n2. View Total Consumption\n3. Get Water-Saving Tip\n4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: tracker.logWaterUsage(); break;
+            case 2: tracker.viewTotalConsumption(); break;
+            case 3: tracker.getWaterSavingTip(); break;
+            case 4: cout << "Exiting...\n"; break;
+            default: cout << "Invalid choice! Try again.\n";
+        }
+    } while (choice != 4);
+
+    return 0;
+}
