@@ -1,0 +1,65 @@
+#include <iostream>
+using namespace std;
+
+class WasteManagement {
+    float plasticWaste, organicWaste, electronicWaste;
+
+public:
+    WasteManagement() : plasticWaste(0), organicWaste(0), electronicWaste(0) {}
+
+    void logWaste() {
+        int type;
+        float weight;
+        cout << "Select Waste Type:\n";
+        cout << "1. Plastic\n2. Organic\n3. Electronic\nEnter choice: ";
+        cin >> type;
+        cout << "Enter waste weight (kg): ";
+        cin >> weight;
+
+        switch (type) {
+            case 1: plasticWaste += weight; break;
+            case 2: organicWaste += weight; break;
+            case 3: electronicWaste += weight; break;
+            default: cout << "Invalid choice!\n"; return;
+        }
+        cout << "Waste logged successfully!\n";
+    }
+
+    void viewTotalWaste() {
+        cout << "Total Waste Collected:\n";
+        cout << "Plastic: " << plasticWaste << " kg\n";
+        cout << "Organic: " << organicWaste << " kg\n";
+        cout << "Electronic: " << electronicWaste << " kg\n";
+    }
+
+    void recyclingSuggestion() {
+        cout << "Recycling Suggestions:\n";
+        if (plasticWaste > 0) cout << "- Recycle plastic at a local recycling center.\n";
+        if (organicWaste > 0) cout << "- Use organic waste for composting.\n";
+        if (electronicWaste > 0) cout << "- Dispose of electronic waste at an e-waste collection facility.\n";
+        if (plasticWaste == 0 && organicWaste == 0 && electronicWaste == 0)
+            cout << "- No waste logged yet.\n";
+    }
+};
+
+int main() {
+    WasteManagement wasteSystem;
+    int choice;
+
+    do {
+        cout << "\nWaste Management System\n";
+        cout << "1. Log Waste\n2. View Total Waste\n3. Get Recycling Suggestion\n4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: wasteSystem.logWaste(); break;
+            case 2: wasteSystem.viewTotalWaste(); break;
+            case 3: wasteSystem.recyclingSuggestion(); break;
+            case 4: cout << "Exiting...\n"; break;
+            default: cout << "Invalid choice! Try again.\n";
+        }
+    } while (choice != 4);
+
+    return 0;
+}
