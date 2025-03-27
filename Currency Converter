@@ -1,0 +1,46 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    double usd_to_inr = 83.15, eur_to_inr = 90.40, gbp_to_inr = 106.50, jpy_to_inr = 0.55;
+    double amount, converted;
+    int choice;
+
+    cout << " Currency Converter \n";
+    cout << "1. USD to INR\n";
+    cout << "2. EUR to INR\n";
+    cout << "3. GBP to INR\n";
+    cout << "4. JPY to INR\n";
+
+    cout << "\nChoose the conversion option (1-4): ";
+    cin >> choice;
+    
+    if (choice < 1 || choice > 4) {
+        cout << "Invalid choice!" << endl;
+        return 0;
+    }
+
+    cout << "Enter amount: ";
+    cin >> amount;
+
+    switch (choice) {
+        case 1: 
+            converted = amount * usd_to_inr;
+            cout << amount << " USD = " << converted << " INR" << endl;
+            break;
+        case 2: 
+            converted = amount * eur_to_inr;
+            cout << amount << " EUR = " << converted << " INR" << endl;
+            break;
+        case 3: 
+            converted = amount * gbp_to_inr;
+            cout << amount << " GBP = " << converted << " INR" << endl;
+            break;
+        case 4: 
+            converted = amount * jpy_to_inr;
+            cout << amount << " JPY = " << converted << " INR" << endl;
+            break;
+    }
+
+    return 0;
+}
