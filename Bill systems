@@ -17,7 +17,6 @@ public:
     double calculateTotal() {
         return price * quantity;
     }
-
     // Method to display the bill details
     void displayBill() {
         cout << "Item Price: " << price << endl;
