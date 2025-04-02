@@ -1,0 +1,83 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Donor {
+public:
+    string name;
+    int age;
+    string bloodGroup;
+    string contact;
+
+    void registerDonor() {
+        cout << "Enter Donor Name: ";
+        cin >> ws; // Clears input buffer
+        getline(cin, name);
+        cout << "Enter Age: ";
+        cin >> age;
+        cout << "Enter Blood Group: ";
+        cin >> bloodGroup;
+        cout << "Enter Contact Number: ";
+        cin >> contact;
+    }
+
+    void displayDonor() {
+        cout << "Name: " << name << ", Age: " << age 
+             << ", Blood Group: " << bloodGroup 
+             << ", Contact: " << contact << endl;
+    }
+};
+
+void searchDonor(Donor donors[], int count, string bloodGroup) {
+    bool found = false;
+    cout << "\nMatching Donors:\n";
+    for (int i = 0; i < count; i++) {
+        if (donors[i].bloodGroup == bloodGroup) {
+            donors[i].displayDonor();
+            found = true;
+        }
+    }
+    if (!found) {
+        cout << "No donors found with blood group " << bloodGroup << endl;
+    }
+}
+
+int main() {
+    Donor donors[100]; 
+    int count = 0;
+    int choice;
+    
+    do {
+        cout << "\nBlood Donation Management System\n";
+        cout << "1. Register Donor\n2. Search Donor\n3. Display All Donors\n4. Exit\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+        
+        switch (choice) {
+            case 1:
+                donors[count].registerDonor();
+                count++;
+                break;
+            case 2: {
+                string bg;
+                cout << "Enter Blood Group to Search: ";
+                cin >> bg;
+                searchDonor(donors, count, bg);
+                break;
+            }
+            case 3:
+                cout << "\nRegistered Donors:\n";
+                for (int i = 0; i < count; i++) {
+                    donors[i].displayDonor();
+                }
+                break;
+            case 4:
+                cout << "Exiting...\n";
+                break;
+            default:
+                cout << "Invalid choice! Try again.\n";
+        }
+    } while (choice != 4);
+
+    return 0;
+}
