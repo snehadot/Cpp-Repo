@@ -6,7 +6,6 @@ private:
     string accountHolder;
     int accountNumber;
     double balance;
-
 public:
     void createAccount() {
         cout << "Enter Account Holder Name: ";
